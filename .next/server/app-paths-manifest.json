@@ -1,9 +1,0 @@
-{
-  "/sitemap.xml/route": "app/sitemap.xml/route.js",
-  "/api/revalidate/route": "app/api/revalidate/route.js",
-  "/robots.txt/route": "app/robots.txt/route.js",
-  "/_not-found/page": "app/_not-found/page.js",
-  "/page": "app/page.js",
-  "/categorie/[slug]/page": "app/categorie/[slug]/page.js",
-  "/produit/[slug]/page": "app/produit/[slug]/page.js"
-}
