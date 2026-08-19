@@ -27,7 +27,7 @@ const ProductThumb = ({ item, lang = defaultLang }) => {
         [];
 
     const firstImage = gallery?.[0]?.file
-        ? `https://www.laceter.com/uploads/${gallery[0].file}`
+        ? `/uploads/${gallery[0].file}`
         : '';
 
     const productLink = url ? buildLocalizedPath(lang, url) : '#';

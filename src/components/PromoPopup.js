@@ -80,7 +80,7 @@ const PromoPopup = ({ discount, lang = defaultLang }) => {
     }, [discount, lang]);
 
     const imageUrl = discount?.discount_image
-        ? `https://www.laceter.com/uploads/${discount.discount_image}`
+        ? `/uploads/${discount.discount_image}`
         : '';
 
     if (!discount || !isOpen) return null;

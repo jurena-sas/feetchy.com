@@ -126,42 +126,6 @@ const textByLang = {
     it: 'Spedizione a 4,90€ e GRATUITA da 4 paia acquistate.',
     de: 'Versand 4,90 € und KOSTENLOS ab 4 gekauften Paaren.',
   },
-  cartStep: {
-    fr: 'Mon panier',
-    en: 'My cart',
-    it: 'Il mio carrello',
-    de: 'Mein Warenkorb',
-  },
-  deliveryStep: {
-    fr: 'Livraison',
-    en: 'Delivery',
-    it: 'Consegna',
-    de: 'Lieferung',
-  },
-  confirmStep: {
-    fr: 'Confirmation',
-    en: 'Confirmation',
-    it: 'Conferma',
-    de: 'Bestätigung',
-  },
-  cartStepSub: {
-    fr: 'Détail de votre produits',
-    en: 'Your products details',
-    it: 'Dettaglio dei prodotti',
-    de: 'Details Ihrer Produkte',
-  },
-  deliveryStepSub: {
-    fr: 'Mes information de livraison',
-    en: 'My delivery information',
-    it: 'Le mie informazioni di consegna',
-    de: 'Meine Lieferinformationen',
-  },
-  confirmStepSub: {
-    fr: 'Récapitulatif de ma commande',
-    en: 'Order summary',
-    it: 'Riepilogo del mio ordine',
-    de: 'Zusammenfassung meiner Bestellung',
-  },
 };
 
 const getText = (lang, key, fallback = '') => {
@@ -217,51 +181,12 @@ const Cart = ({ lang: langProp } = {}) => {
           ) : (
             <div className="cart-layout">
               <div className="cart-main">
-                <div className="cart-steps">
-                  <div className="cart-step cart-step--active">
-                    <div className="cart-step__title-row">
-                      <span className="cart-step__index">01</span>
-                      <span className="cart-step__title">
-                        {getText(currentLang, 'cartStep', 'Mon panier')}
-                      </span>
-                    </div>
-                    <div className="cart-step__sub">
-                      {getText(currentLang, 'cartStepSub', 'Détail de votre produits')}
-                    </div>
-                  </div>
-
-                  <div className="cart-step">
-                    <div className="cart-step__title-row">
-                      <span className="cart-step__index">02</span>
-                      <span className="cart-step__title">
-                        {getText(currentLang, 'deliveryStep', 'Livraison')}
-                      </span>
-                    </div>
-                    <div className="cart-step__sub">
-                      {getText(currentLang, 'deliveryStepSub', 'Mes information de livraison')}
-                    </div>
-                  </div>
-
-                  <div className="cart-step">
-                    <div className="cart-step__title-row">
-                      <span className="cart-step__index">03</span>
-                      <span className="cart-step__title">
-                        {getText(currentLang, 'confirmStep', 'Confirmation')}
-                      </span>
-                    </div>
-                    <div className="cart-step__sub">
-                      {getText(currentLang, 'confirmStepSub', 'Récapitulatif de ma commande')}
-                    </div>
-                  </div>
-                </div>
-
                 <div className="cart-table">
                   <div className="cart-table__head">
                     <div>{getText(currentLang, 'product', 'Intitulé')}</div>
                     <div>{getText(currentLang, 'unitPrice', 'Prix')}</div>
                     <div>{getText(currentLang, 'quantity', 'Qté')}</div>
                     <div>{getText(currentLang, 'total', 'Total')}</div>
-                    <div></div>
                   </div>
 
                   {cart.map((item) => {
@@ -275,6 +200,15 @@ const Cart = ({ lang: langProp } = {}) => {
                         className="cart-table__row"
                         key={`${item.id}-${referenceIndex}`}
                       >
+                        <button
+                          type="button"
+                          className="cart-remove"
+                          onClick={() => removeFromCart(item.id, referenceIndex)}
+                          aria-label="Supprimer"
+                        >
+                          {getText(currentLang, 'remove', '×')}
+                        </button>
+
                         <div className="cart-product">
                           {item.image ? (
                             <img
@@ -359,17 +293,6 @@ const Cart = ({ lang: langProp } = {}) => {
 
                         <div className="cart-table__line-total">
                           {formatPrice(lineTotal)}
-                        </div>
-
-                        <div>
-                          <button
-                            type="button"
-                            className="cart-remove"
-                            onClick={() => removeFromCart(item.id, referenceIndex)}
-                            aria-label="Supprimer"
-                          >
-                            {getText(currentLang, 'remove', '×')}
-                          </button>
                         </div>
                       </div>
                     );

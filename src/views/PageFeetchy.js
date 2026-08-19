@@ -5,7 +5,7 @@ import Header from '../components/Header';
 import Footer from '../components/Footer';
 import { defaultLang } from '../config.js';
 
-const IMG_URL = 'https://www.laceter.com/uploads/';
+const IMG_URL = '/uploads/';
 
 const PageFeetchy = ({ id, lang = defaultLang, initialContentData = null }) => {
     const item = initialContentData;

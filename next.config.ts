@@ -11,6 +11,10 @@ const nextConfig: NextConfig = {
         source: "/laceter-api-payment/:path*",
         destination: "https://www.laceter.com/api-payment-feetchy/:path*",
       },
+      {
+        source: "/uploads/:path*",
+        destination: "https://www.laceter.com/uploads/:path*",
+      },
     ];
   },
 };

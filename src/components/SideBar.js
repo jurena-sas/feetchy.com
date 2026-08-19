@@ -24,7 +24,7 @@ const SideBar = ({
     const [mobileOpen, setMobileOpen] = useState(false);
 
     const imageUrl = sidebarImage
-        ? `https://www.laceter.com/uploads/${sidebarImage}`
+        ? `/uploads/${sidebarImage}`
         : 'img/ads/1.jpg';
 
     const linkUrl = categorySlug ? `/${cleanUrl(categorySlug)}` : '#';

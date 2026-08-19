@@ -2,7 +2,7 @@
 
 import React, { useMemo } from 'react';
 
-const IMG_URL = 'https://www.laceter.com/uploads/';
+const IMG_URL = '/uploads/';
 const FALLBACK_LANG = 'fr';
 
 const uiText = {

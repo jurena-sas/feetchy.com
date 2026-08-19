@@ -36,11 +36,11 @@ const Home = ({
 
             <Header lang={currentLang} />
             <Slider lang={currentLang} initialSlides={initialSlides} />
-            <Services lang={currentLang} />
             <NewProducts lang={currentLang} initialItems={initialNewProductItems} />
             <Banners lang={currentLang} initialItems={initialBannerItems} />
             <BlogLatest lang={currentLang} initialRawItems={initialBlogRawItems} />
             <SeoHome initialHtml={initialSeoHtml} />
+            <Services lang={currentLang} />
             <Footer lang={currentLang} />
         </div>
     );

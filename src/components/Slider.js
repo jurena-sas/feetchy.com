@@ -10,7 +10,7 @@ import "swiper/css/navigation";
 import "swiper/css/pagination";
 import "../styles/swiper.css";
 
-const UPLOADS_BASE = "https://www.laceter.com/uploads";
+const UPLOADS_BASE = "/uploads";
 
 const Slider = ({ lang = "fr", initialSlides = [] }) => {
   const slides = initialSlides;

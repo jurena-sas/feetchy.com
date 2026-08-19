@@ -3,7 +3,7 @@
 import React from 'react';
 import Link from 'next/link';
 
-const UPLOADS_BASE = 'https://www.laceter.com/uploads';
+const UPLOADS_BASE = '/uploads';
 
 const Banners = ({ lang = 'fr', initialItems = [] }) => {
     const items = initialItems;

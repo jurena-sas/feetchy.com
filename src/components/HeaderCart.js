@@ -1,6 +1,6 @@
 "use client";
 
-import React from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import Link from 'next/link';
 import { useCart } from '../context/CartContext';
 import { defaultLang, getLocalizedValue } from '../config';
@@ -74,12 +74,27 @@ const HeaderCart = ({ lang = defaultLang }) => {
   const cartPath = lang === defaultLang ? '/cart' : `/${lang}/cart`;
   const checkoutPath = lang === defaultLang ? '/checkout' : `/${lang}/checkout`;
 
+  const [pulse, setPulse] = useState(false);
+  const previousTotal = useRef(totalItems);
+
+  useEffect(() => {
+    const increased = totalItems > previousTotal.current;
+    previousTotal.current = totalItems;
+
+    if (increased) {
+      setPulse(true);
+      const timeout = setTimeout(() => setPulse(false), 500);
+      return () => clearTimeout(timeout);
+    }
+  }, [totalItems]);
+
   return (
     <div className="header-bottom-right header-bottom-right-2">
       <div className="shop-cart">
         <Link href={cartPath}>
-          <span className="lnr lnr-cart"></span>{' '}
-          {getText(lang, 'cartLabel', 'Mon panier')} ({totalItems}{''})
+          <span className={`lnr lnr-cart${pulse ? ' cart-pulse' : ''}`}></span>{' '}
+          <span className="hidden-xs">{getText(lang, 'cartLabel', 'Mon panier')} </span>
+          ({totalItems}{''})
         </Link>
       </div>
 

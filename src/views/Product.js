@@ -16,6 +16,7 @@ const textByLang = {
     addReview: { fr: "Ajouter votre avis", en: "Add your review", it: "Aggiungi la tua recensione", de: "Bewertung hinzufügen", es: "Añadir tu reseña" },
     reference: { fr: "Taille / Référence", en: "Size / Reference", it: "Taglia / Riferimento", de: "Größe / Referenz", es: "Talla / Referencia" },
     addToCart: { fr: "Ajouter au panier", en: "Add to cart", it: "Aggiungi al carrello", de: "In den Warenkorb", es: "Añadir al carrito" },
+    added: { fr: "Ajouté", en: "Added", it: "Aggiunto", de: "Hinzugefügt", es: "Añadido" },
     notFound: { fr: "Produit introuvable", en: "Product not found", it: "Prodotto non trovato", de: "Produkt nicht gefunden", es: "Producto no encontrado" },
     loading: { fr: "Chargement...", en: "Loading...", it: "Caricamento...", de: "Wird geladen...", es: "Cargando..." },
     sku: { fr: "SKU", en: "SKU", it: "SKU", de: "SKU", es: "SKU" },
@@ -39,6 +40,7 @@ const Product = ({
     const [selectedRefIndex, setSelectedRefIndex] = useState(0);
     const [selectedImageIndex, setSelectedImageIndex] = useState(0);
     const [quantity, setQuantity] = useState(1);
+    const [justAdded, setJustAdded] = useState(false);
 
     const cleanUrl = (url) => {
         if (!url) return "";
@@ -76,7 +78,7 @@ const Product = ({
 
     const images = gallery
         .filter((img) => img?.file)
-        .map((img) => `https://www.laceter.com/uploads/${img.file}`);
+        .map((img) => `/uploads/${img.file}`);
 
     const uniqueImages = [...new Set(images)];
     const mainImage = uniqueImages[0] || "/img/product/1.jpg";
@@ -196,6 +198,9 @@ const Product = ({
         };
 
         addToCart(productToAdd, quantity);
+
+        setJustAdded(true);
+        setTimeout(() => setJustAdded(false), 1500);
     };
 
     return (
@@ -419,12 +424,16 @@ const Product = ({
                                                         height: "42px",
                                                         padding: "0 20px",
                                                         border: "none",
-                                                        background: inStock ? "#222" : "#999",
+                                                        background: justAdded ? "#3c9a5f" : inStock ? "#222" : "#999",
                                                         color: "#fff",
                                                         cursor: inStock ? "pointer" : "not-allowed",
+                                                        transition: "background 0.25s ease, transform 0.2s ease",
+                                                        transform: justAdded ? "scale(1.04)" : "scale(1)",
                                                     }}
                                                 >
-                                                    {getLocalizedValue(textByLang.addToCart, lang, "Ajouter au panier")}
+                                                    {justAdded
+                                                        ? `✓ ${getLocalizedValue(textByLang.added, lang, "Ajouté")}`
+                                                        : getLocalizedValue(textByLang.addToCart, lang, "Ajouter au panier")}
                                                 </button>
                                             </div>
 
