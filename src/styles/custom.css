@@ -189,6 +189,18 @@ h1.bedroom-side-title {
   aspect-ratio: 370 / 531;
 }
 
+@media (max-width: 767px) {
+  .home-banner-square,
+  .home-banner-wide,
+  .home-banner-tall {
+    aspect-ratio: 1 / 1;
+  }
+
+  .single-banner {
+    margin-bottom: 15px;
+  }
+}
+
 a:hover,
 a:focus,
 a:active {
@@ -283,7 +295,6 @@ a:active {
 header .logo img {
 
     margin: 0px auto;
-    margin-top: -35px;
 
 }
 
@@ -293,14 +304,29 @@ header .shop-cart a {
 
 }
 
+.shop-cart a .hidden-xs {
+    font-size: 14px;
+}
+
 @media (max-width: 760px) {
     .header-mobile-nav-btn {
+        position: relative;
+        z-index: 20;
         width: 28px;
         height: 28px;
         background-size: 28px;
         margin-left: 10px;
     }
 
+    .header-bottom-right {
+        margin-top: -4px !important;
+    }
+    header .logo img {
+        margin-top: -35px !important;
+    }
+    .header-bottom-area {
+        padding-bottom: 40px;
+    }
     .header-bottom-area .row {
         position: relative;
     }
@@ -310,6 +336,10 @@ header .shop-cart a {
         top: 0;
         right: 15px;
         width: auto;
+    }
+
+    .slide_all_1 {
+        top: 10% !important;
     }
 
     .header-cart-col .shop-cart-hover {
@@ -360,6 +390,15 @@ header .shop-cart a {
 
 }
 
+.mobile-menu-area .col-md-12 > a {
+    display: block;
+    text-align: center;
+}
+
+.mobile-menu-area .logo img {
+    margin: 0 auto;
+}
+
 .mobile-menu-area .logo {
 
     margin-top: 50px;
@@ -372,6 +411,13 @@ header .shop-cart a {
 
 }
 
+.mobile-menu-area #mobile-menu ul li a {
+    font-size: 17px;
+    font-weight: 900;
+    text-transform: uppercase;
+    line-height: 30px;
+}
+
 .close-nav {
   position: fixed;
   top: 40px;
@@ -380,8 +426,8 @@ header .shop-cart a {
   height: 40px;
   z-index: 100000;
   border: 0;
-  background: #222;
-  color: #fff;
+  background: #fff;
+  color: #222;
   font-size: 28px;
   line-height: 40px;
   cursor: pointer;
@@ -467,7 +513,24 @@ header .shop-cart a {
     vertical-align: top;
     border-radius: 50px;
 }
+@media (max-width: 760px) {
 
+    .slide_all_1 {
+        top: 5% !important;
+        left: 7% !important;
+    }
+
+    .slide_all_1 h3, .slide_all_1 h2 {
+        line-height: 1.2;
+        max-width: 300px !important;
+        font-size: 22px !important;
+    }
+
+    .new-product-area {
+        padding-top: 50px !important;
+    }
+
+}
 /* Services */
 
 .service-icon {
@@ -626,7 +689,30 @@ header .shop-cart a {
     margin-right: 10px;
     width: 100px;
     height: 100px;
+    overflow: hidden;
 
+}
+
+.product-thumb-btn img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.product-main-image {
+    position: relative;
+    aspect-ratio: 1 / 1;
+    overflow: hidden;
+}
+
+.product-main-image .image-link,
+.product-main-image .first_img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    position: absolute;
+    top: 0;
+    left: 0;
 }
 
 /* Cart */

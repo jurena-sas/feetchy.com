@@ -36,8 +36,9 @@ const Header = ({ lang = defaultLang }) => {
                                 <div
                                     className="header-mobile-nav-btn hidden-lg"
                                     onClick={() => setMobileOpen(true)}
+                                    style={{ visibility: mobileOpen ? 'hidden' : 'visible' }}
                                 >
-                                    
+
                                 </div>
 
                                 <div className="header-lang hidden-md hidden-sm hidden-xs">
