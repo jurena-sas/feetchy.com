@@ -4,10 +4,11 @@ import Checkout from '@/src/views/Checkout';
 import Confirm from '@/src/views/Confirm';
 import Success from '@/src/views/Success';
 import Account from '@/src/views/Account';
+import Sitemap from '@/src/views/Sitemap';
 import RouteRenderer, { fetchSeoMetaForItem } from '@/src/app/RouteRenderer';
 import { allowedLangs, defaultLang, HOME_CONTENT_ID } from '@/src/config';
-import { fetchFeetchyRoutes, findRouteItem, getRouteLabel, getRouteMetadata } from '@/src/app/route-utils';
-import { fetchHomeData, fetchHomeMetadata } from '@/src/app/route-data';
+import { fetchFeetchyRoutes, findRouteItem, findRouteItemWithSize, getRouteLabel, getRouteMetadata } from '@/src/app/route-utils';
+import { fetchHomeData, fetchHomeMetadata, fetchSitemapData } from '@/src/app/route-data';
 
 const staticPages = {
   cart: Cart,
@@ -15,6 +16,25 @@ const staticPages = {
   confirm: Confirm,
   success: Success,
   account: Account,
+};
+
+const sitemapMetadataByLang = {
+  fr: {
+    title: 'Plan du site | Feetchy',
+    description: 'Retrouvez toutes les pages, catégories, couleurs et produits Feetchy sur notre plan du site.',
+  },
+  en: {
+    title: 'Sitemap | Feetchy',
+    description: 'Browse all Feetchy pages, categories, colors and products on our sitemap.',
+  },
+  it: {
+    title: 'Mappa del sito | Feetchy',
+    description: 'Trova tutte le pagine, categorie, colori e prodotti Feetchy nella nostra mappa del sito.',
+  },
+  de: {
+    title: 'Seitenplan | Feetchy',
+    description: 'Finden Sie alle Feetchy-Seiten, Kategorien, Farben und Produkte auf unserem Seitenplan.',
+  },
 };
 
 const parseSegments = (segments = []) => {
@@ -35,14 +55,34 @@ export async function generateMetadata({ params }) {
     return fetchHomeMetadata(lang, HOME_CONTENT_ID);
   }
 
+  if (slug === 'sitemap') {
+    return sitemapMetadataByLang[lang] || sitemapMetadataByLang[defaultLang];
+  }
+
   if (staticPages[slug]) {
     return { title: `Feetchy - ${slug}`, description: 'Feetchy' };
   }
 
   const items = await fetchFeetchyRoutes();
   const item = findRouteItem(items, lang, slug);
-  const seoMeta = await fetchSeoMetaForItem(item);
-  return getRouteMetadata(item, lang, seoMeta);
+
+  if (item) {
+    const seoMeta = await fetchSeoMetaForItem(item);
+    return getRouteMetadata(item, lang, seoMeta);
+  }
+
+  // Size-filtered variant of a category (e.g. "category-slug-75") — reuse
+  // the parent category's title/description instead of a generic fallback,
+  // and keep it out of the index since it's duplicate content.
+  const sizeMatch = findRouteItemWithSize(items, lang, slug);
+  if (sizeMatch) {
+    const categoryItem = items.find((entry) => entry.id === sizeMatch.id) || null;
+    const seoMeta = await fetchSeoMetaForItem(categoryItem);
+    const metadata = getRouteMetadata(categoryItem, lang, seoMeta);
+    return { ...metadata, robots: { index: false, follow: true } };
+  }
+
+  return getRouteMetadata(item, lang, null);
 }
 
 export default async function Page({ params }) {
@@ -52,6 +92,11 @@ export default async function Page({ params }) {
   if (!slug) {
     const homeData = await fetchHomeData(lang, HOME_CONTENT_ID);
     return <Home lang={lang} {...homeData} />;
+  }
+
+  if (slug === 'sitemap') {
+    const sitemapData = await fetchSitemapData(lang);
+    return <Sitemap lang={lang} {...sitemapData} />;
   }
 
   const StaticPage = staticPages[slug];

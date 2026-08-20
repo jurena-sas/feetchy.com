@@ -135,6 +135,84 @@ export const fetchHomeData = async (lang, HOME_CONTENT_ID) => {
   };
 };
 
+const SITEMAP_STATUT_ALLOWED = ['publish', 'home'];
+
+const mapSitemapItem = (item, lang) => {
+  const title =
+    item?.content?.content_title?.[lang]?.trim() ||
+    item?.content?.content_title?.fr?.trim() ||
+    '';
+
+  const url =
+    item?.metas?.content_url_feetchy?.[lang] ||
+    item?.metas?.content_url_feetchy?.fr ||
+    '';
+
+  return { id: item.id, title, url };
+};
+
+const sortByTitle = (items, lang) =>
+  [...items].sort((a, b) => a.title.localeCompare(b.title, lang));
+
+export const fetchSitemapData = async (lang) => {
+  const [pages, categories, colors, products, posts] = await Promise.all([
+    safeFetchJson(`${API_BASE}/list.page_feetchy.json`),
+    safeFetchJson(`${API_BASE}/list.category.json`),
+    safeFetchJson(`${API_BASE}/list.color.json`),
+    safeFetchJson(`${API_BASE}/list.product.json`),
+    safeFetchJson(`${API_BASE}/list.post_feetchy.json`),
+  ]);
+
+  const isVisible = (item) =>
+    SITEMAP_STATUT_ALLOWED.includes(item?.content?.content_statut);
+
+  const mapAndFilter = (items) =>
+    (items || [])
+      .filter(isVisible)
+      .map((item) => mapSitemapItem(item, lang))
+      .filter((item) => item.title && item.url);
+
+  const categoryItems = mapAndFilter(categories?.items);
+
+  const categoryTitleById = new Map(
+    (categories?.items || []).map((item) => [
+      String(item.id),
+      item?.content?.content_title?.[lang]?.trim() ||
+        item?.content?.content_title?.fr?.trim() ||
+        '',
+    ])
+  );
+
+  const productGroups = new Map();
+  (products?.items || [])
+    .filter(isVisible)
+    .forEach((item) => {
+      const mapped = mapSitemapItem(item, lang);
+      if (!mapped.title || !mapped.url) return;
+
+      const rangeId = String(item?.metas?.content_range || '0');
+      const groupLabel = categoryTitleById.get(rangeId);
+      if (!groupLabel) return;
+
+      if (!productGroups.has(groupLabel)) {
+        productGroups.set(groupLabel, []);
+      }
+      productGroups.get(groupLabel).push(mapped);
+    });
+
+  const productGroupList = Array.from(productGroups.entries())
+    .map(([label, items]) => ({ label, items: sortByTitle(items, lang) }))
+    .sort((a, b) => a.label.localeCompare(b.label, lang));
+
+  return {
+    pages: sortByTitle(mapAndFilter(pages?.items), lang),
+    categories: sortByTitle(categoryItems, lang),
+    colors: sortByTitle(mapAndFilter(colors?.items), lang),
+    productGroups: productGroupList,
+    posts: sortByTitle(mapAndFilter(posts?.items), lang),
+  };
+};
+
 export const pickRandomProducts = (items, lang, count = 6) => {
   const eligible = items.filter((product) => {
     const isPublished = product?.content?.content_statut === 'publish';

@@ -7,8 +7,36 @@ import Footer from '../components/Footer';
 import SideBar from '../components/SideBar';
 import ProductThumb from '../components/ProductThumb';
 
-const Color = ({ id, lang = 'fr', label = '', initialItems = [] }) => {
+const getLocalizedValue = (value, lang = 'fr', fallback = '') => {
+    if (!value) return fallback;
+
+    if (typeof value === 'string') {
+        return value;
+    }
+
+    return value?.[lang] || value?.fr || fallback;
+};
+
+const Color = ({
+    id,
+    lang = 'fr',
+    label = '',
+    initialItems = [],
+    initialContentData = null,
+}) => {
     const [items] = useState(initialItems);
+    const [colorData] = useState(initialContentData);
+
+    const metas = colorData?.metas || colorData || {};
+
+    const colorTitle =
+        getLocalizedValue(metas.content_title_feetchy, lang) ||
+        label ||
+        'Couleur';
+
+    const colorDescription =
+        getLocalizedValue(metas.content_description_feetchy, lang) ||
+        '';
 
     const visibleItems = useMemo(() => {
         return items.filter((item) => {
@@ -38,6 +66,21 @@ const Color = ({ id, lang = 'fr', label = '', initialItems = [] }) => {
                         </div>
 
                         <div className="col-lg-9 col-md-9 col-sm-9 col-xs-12">
+                            <div className="row">
+                                <div className="category-intro col-xs-12">
+                                    <h1 className="bedroom-side-title">{colorTitle}</h1>
+
+                                    {colorDescription && (
+                                        <div
+                                            className="category-intro__description"
+                                            dangerouslySetInnerHTML={{
+                                                __html: colorDescription,
+                                            }}
+                                        />
+                                    )}
+                                </div>
+                            </div>
+
                             <div className="caregory-products-area">
                                 <div className="tab-content">
                                     <div className="tab-pane active" id="viewed">

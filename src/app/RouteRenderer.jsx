@@ -93,8 +93,11 @@ const fetchInitialProps = async (key, id) => {
     }
 
     case 'color': {
-      const items = await fetchProductColorList(id);
-      return { initialItems: items };
+      const [items, contentData] = await Promise.all([
+        fetchProductColorList(id),
+        fetchContentById(id),
+      ]);
+      return { initialItems: items, initialContentData: contentData };
     }
 
     case 'pagefeetchy':

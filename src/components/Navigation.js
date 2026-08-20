@@ -65,6 +65,8 @@ const Navigation = ({ lang = defaultLang }) => {
                                             return null;
                                         }
 
+                                        const subItems = Array.isArray(item.sub) ? item.sub : [];
+
                                         return (
                                             <li
                                                 key={`${item.id}-${index}`}
@@ -77,6 +79,30 @@ const Navigation = ({ lang = defaultLang }) => {
                                                 >
                                                     {label}
                                                 </Link>
+
+                                                {subItems.length > 0 && (
+                                                    <ul>
+                                                        {subItems.map((subItem, subIndex) => {
+                                                            const subLabel = getLabel(subItem);
+                                                            const subUrl = getUrl(subItem);
+
+                                                            if (!subLabel) return null;
+
+                                                            return (
+                                                                <li key={`${subItem.id}-${subIndex}`}>
+                                                                    <Link
+                                                                        href={buildLocalizedPath(
+                                                                            lang,
+                                                                            subUrl
+                                                                        )}
+                                                                    >
+                                                                        {subLabel}
+                                                                    </Link>
+                                                                </li>
+                                                            );
+                                                        })}
+                                                    </ul>
+                                                )}
                                             </li>
                                         );
                                     })}

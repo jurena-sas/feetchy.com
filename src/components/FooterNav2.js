@@ -3,7 +3,14 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import Link from "next/link";
-import { defaultLang, buildLocalizedPath } from "../config.js";
+import { defaultLang, buildLocalizedPath, getLocalizedValue } from "../config.js";
+
+const sitemapLabels = {
+  fr: "Plan du site",
+  en: "Sitemap",
+  it: "Mappa del sito",
+  de: "Seitenplan",
+};
 
 const FooterNav2 = ({ lang = defaultLang }) => {
   const [items, setItems] = useState([]);
@@ -42,6 +49,11 @@ const FooterNav2 = ({ lang = defaultLang }) => {
               </li>
             );
           })}
+          <li>
+            <Link href={buildLocalizedPath(lang, "sitemap")}>
+              {getLocalizedValue(sitemapLabels, lang, "Plan du site")}
+            </Link>
+          </li>
         </ul>
       </div>
     </div>

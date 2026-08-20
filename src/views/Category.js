@@ -55,15 +55,11 @@ const Category = ({
 
     const categoryTitle =
         getLocalizedValue(metas.content_title_feetchy, lang) ||
-        getLocalizedValue(categoryData?.content?.content_title, lang) ||
-        getLocalizedValue(categoryData?.content_title, lang) ||
         label ||
         'Catégorie';
 
     const categoryDescription =
         getLocalizedValue(metas.content_description_feetchy, lang) ||
-        getLocalizedValue(categoryData?.content?.content_html, lang) ||
-        getLocalizedValue(categoryData?.content_html, lang) ||
         '';
 
     const sidebarImage =
