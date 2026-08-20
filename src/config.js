@@ -37,5 +37,6 @@ export const uiTranslations = {
     en: 'Free shipping from {qty} pairs purchased',
     it: 'Spedizione gratuita a partire da {qty} paia acquistate',
     de: 'Kostenloser Versand ab {qty} gekauften Paaren',
+    es: 'Envío gratis a partir de {qty} pares comprados',
   },
 };

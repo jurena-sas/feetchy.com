@@ -142,10 +142,6 @@ const Product = ({
     const description =
         product?.metas?.content_description_feetchy?.[lang] ||
         product?.metas?.content_description_feetchy?.fr ||
-        product?.metas?.content_description?.[lang] ||
-        product?.metas?.content_description?.fr ||
-        product?.content_html?.[lang] ||
-        product?.content_html?.fr ||
         "";
 
     const price = Number(

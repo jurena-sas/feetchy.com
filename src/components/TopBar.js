@@ -6,6 +6,14 @@ import {
     getLocalizedValue,
     uiTranslations,
 } from '../config';
+
+const withCodeLabels = {
+    fr: 'avec le code',
+    en: 'with code',
+    it: 'con il codice',
+    de: 'mit dem Code',
+    es: 'con el código',
+};
 import { useCart } from '../context/CartContext';
 import { useDiscount } from '../context/DiscountContext';
 
@@ -31,7 +39,8 @@ const TopBar = ({ lang = defaultLang }) => {
         const code = activeDiscount.discount_code;
 
         if (percent && code) {
-            return `-${percent}% avec le code ${code}`;
+            const withCode = getLocalizedValue(withCodeLabels, lang, 'avec le code');
+            return `-${percent}% ${withCode} ${code}`;
         }
 
         if (percent) {
