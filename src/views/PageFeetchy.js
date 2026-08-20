@@ -58,6 +58,7 @@ const PageFeetchy = ({ id, lang = defaultLang, initialContentData = null }) => {
                                     <img
                                         src={imageUrl}
                                         alt={title || ''}
+                                        title={title || ''}
                                         className="img-fluid"
                                     />
                                 </div>

@@ -41,9 +41,9 @@ const NavigationMobile = ({ lang = defaultLang, mobileOpen, setMobileOpen }) => 
 
                 <div className="row">
                     <div className="col-md-12">
-                        <Link href={buildLocalizedPath(lang)}>
+                        <Link href={buildLocalizedPath(lang)} title="Feetchy">
                             <div className="logo logo2">
-                                <img src="/assets/img/logo.png" alt="Logo" />
+                                <img src="/assets/img/logo.png" alt="Feetchy" title="Feetchy" />
                             </div>
                         </Link>
 
@@ -60,6 +60,7 @@ const NavigationMobile = ({ lang = defaultLang, mobileOpen, setMobileOpen }) => 
                                             <li key={item.id}>
                                                 <Link
                                                     href={buildLocalizedPath(lang, rawUrl)}
+                                                    title={label}
                                                     onClick={() => setMobileOpen(false)}
                                                 >
                                                     {label}
@@ -70,6 +71,7 @@ const NavigationMobile = ({ lang = defaultLang, mobileOpen, setMobileOpen }) => 
                                     <li>
                                         <Link
                                             href={buildLocalizedPath(lang, 'account')}
+                                            title={getLocalizedValue(accountLabels, lang, 'Mon compte')}
                                             onClick={() => setMobileOpen(false)}
                                         >
                                             {getLocalizedValue(accountLabels, lang, 'Mon compte')}

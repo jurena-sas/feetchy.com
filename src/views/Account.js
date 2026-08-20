@@ -395,6 +395,7 @@ const AccountInner = ({ lang: langProp } = {}) => {
                                 <p style={{ marginTop: 20 }}>
                                     <a
                                         href="#"
+                                        title={getText(currentLang, 'noPassword', "Je n'ai pas de mot de passe")}
                                         onClick={(e) => {
                                             e.preventDefault();
                                             setError('');
@@ -444,6 +445,7 @@ const AccountInner = ({ lang: langProp } = {}) => {
                                 <p style={{ marginTop: 20 }}>
                                     <a
                                         href="#"
+                                        title={getText(currentLang, 'backToLogin', 'Retour à la connexion')}
                                         onClick={(e) => {
                                             e.preventDefault();
                                             setError('');
@@ -474,6 +476,7 @@ const AccountInner = ({ lang: langProp } = {}) => {
 
                             <a
                                 href="#"
+                                title={getText(currentLang, 'logout', 'Déconnexion')}
                                 onClick={(e) => {
                                     e.preventDefault();
                                     logout();
@@ -520,6 +523,7 @@ const AccountInner = ({ lang: langProp } = {}) => {
                                             href={getInvoiceUrl(order)}
                                             target="_blank"
                                             rel="noreferrer"
+                                            title={getText(currentLang, 'invoice')}
                                         >
                                             {getText(currentLang, 'invoice')}
                                         </a>

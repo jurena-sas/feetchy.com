@@ -6,8 +6,8 @@ import Success from '@/src/views/Success';
 import Account from '@/src/views/Account';
 import Sitemap from '@/src/views/Sitemap';
 import RouteRenderer, { fetchSeoMetaForItem } from '@/src/app/RouteRenderer';
-import { allowedLangs, defaultLang, HOME_CONTENT_ID } from '@/src/config';
-import { fetchFeetchyRoutes, findRouteItem, findRouteItemWithSize, getRouteLabel, getRouteMetadata } from '@/src/app/route-utils';
+import { allowedLangs, buildLocalizedPath, defaultLang, HOME_CONTENT_ID } from '@/src/config';
+import { buildAlternates, buildItemAlternates, fetchFeetchyRoutes, findRouteItem, findRouteItemWithSize, getRouteLabel, getRouteMetadata } from '@/src/app/route-utils';
 import { fetchHomeData, fetchHomeMetadata, fetchSitemapData } from '@/src/app/route-data';
 
 const staticPages = {
@@ -37,6 +37,46 @@ const sitemapMetadataByLang = {
   },
 };
 
+const staticPageMetadataByLang = {
+  cart: {
+    fr: { title: 'Mon panier | Feetchy', description: 'Consultez et modifiez le contenu de votre panier Feetchy avant de passer commande.' },
+    en: { title: 'My cart | Feetchy', description: 'Review and edit your Feetchy cart before checking out.' },
+    it: { title: 'Il mio carrello | Feetchy', description: 'Consulta e modifica il contenuto del tuo carrello Feetchy prima di ordinare.' },
+    de: { title: 'Mein Warenkorb | Feetchy', description: 'Überprüfen und ändern Sie Ihren Feetchy-Warenkorb vor dem Bezahlen.' },
+  },
+  checkout: {
+    fr: { title: 'Livraison | Feetchy', description: 'Renseignez vos informations de livraison pour finaliser votre commande Feetchy.' },
+    en: { title: 'Shipping | Feetchy', description: 'Enter your shipping details to complete your Feetchy order.' },
+    it: { title: 'Consegna | Feetchy', description: 'Inserisci i tuoi dati di consegna per completare il tuo ordine Feetchy.' },
+    de: { title: 'Versand | Feetchy', description: 'Geben Sie Ihre Lieferdaten ein, um Ihre Feetchy-Bestellung abzuschließen.' },
+  },
+  confirm: {
+    fr: { title: 'Confirmation de commande | Feetchy', description: 'Vérifiez le récapitulatif de votre commande Feetchy avant paiement.' },
+    en: { title: 'Order confirmation | Feetchy', description: 'Review your Feetchy order summary before payment.' },
+    it: { title: 'Conferma ordine | Feetchy', description: 'Verifica il riepilogo del tuo ordine Feetchy prima del pagamento.' },
+    de: { title: 'Bestellbestätigung | Feetchy', description: 'Überprüfen Sie Ihre Feetchy-Bestellübersicht vor der Zahlung.' },
+  },
+  success: {
+    fr: { title: 'Commande confirmée | Feetchy', description: 'Votre commande Feetchy a bien été enregistrée.' },
+    en: { title: 'Order confirmed | Feetchy', description: 'Your Feetchy order has been successfully placed.' },
+    it: { title: 'Ordine confermato | Feetchy', description: 'Il tuo ordine Feetchy è stato registrato con successo.' },
+    de: { title: 'Bestellung bestätigt | Feetchy', description: 'Ihre Feetchy-Bestellung wurde erfolgreich aufgegeben.' },
+  },
+  account: {
+    fr: { title: 'Mon compte | Feetchy', description: 'Connectez-vous à votre compte Feetchy pour suivre vos commandes et télécharger vos factures.' },
+    en: { title: 'My account | Feetchy', description: 'Sign in to your Feetchy account to track orders and download invoices.' },
+    it: { title: 'Il mio account | Feetchy', description: 'Accedi al tuo account Feetchy per seguire gli ordini e scaricare le fatture.' },
+    de: { title: 'Mein Konto | Feetchy', description: 'Melden Sie sich bei Ihrem Feetchy-Konto an, um Bestellungen zu verfolgen und Rechnungen herunterzuladen.' },
+  },
+};
+
+const staticPageAlternatePaths = (slug) => ({
+  fr: `/${slug}`,
+  en: `/en/${slug}`,
+  it: `/it/${slug}`,
+  de: `/de/${slug}`,
+});
+
 const parseSegments = (segments = []) => {
   const first = segments[0];
   const hasLang = allowedLangs.includes(first);
@@ -52,15 +92,24 @@ export async function generateMetadata({ params }) {
   const { lang, slug } = parseSegments(segments);
 
   if (!slug) {
-    return fetchHomeMetadata(lang, HOME_CONTENT_ID);
+    const homeMeta = await fetchHomeMetadata(lang, HOME_CONTENT_ID);
+    const alternates = buildAlternates({ fr: '/', en: '/en', it: '/it', de: '/de' }, lang);
+    return alternates ? { ...homeMeta, alternates } : homeMeta;
   }
 
   if (slug === 'sitemap') {
-    return sitemapMetadataByLang[lang] || sitemapMetadataByLang[defaultLang];
+    const sitemapMeta = sitemapMetadataByLang[lang] || sitemapMetadataByLang[defaultLang];
+    const alternates = buildAlternates(staticPageAlternatePaths('sitemap'), lang);
+    return alternates ? { ...sitemapMeta, alternates } : sitemapMeta;
   }
 
   if (staticPages[slug]) {
-    return { title: `Feetchy - ${slug}`, description: 'Feetchy' };
+    const staticMeta =
+      staticPageMetadataByLang[slug]?.[lang] ||
+      staticPageMetadataByLang[slug]?.[defaultLang] ||
+      { title: `Feetchy - ${slug}`, description: 'Feetchy' };
+    const alternates = buildAlternates(staticPageAlternatePaths(slug), lang);
+    return alternates ? { ...staticMeta, alternates } : staticMeta;
   }
 
   const items = await fetchFeetchyRoutes();
@@ -68,7 +117,9 @@ export async function generateMetadata({ params }) {
 
   if (item) {
     const seoMeta = await fetchSeoMetaForItem(item);
-    return getRouteMetadata(item, lang, seoMeta);
+    const metadata = getRouteMetadata(item, lang, seoMeta);
+    const alternates = buildItemAlternates(item, lang);
+    return alternates ? { ...metadata, alternates } : metadata;
   }
 
   // Size-filtered variant of a category (e.g. "category-slug-75") — reuse
@@ -79,7 +130,15 @@ export async function generateMetadata({ params }) {
     const categoryItem = items.find((entry) => entry.id === sizeMatch.id) || null;
     const seoMeta = await fetchSeoMetaForItem(categoryItem);
     const metadata = getRouteMetadata(categoryItem, lang, seoMeta);
-    return { ...metadata, robots: { index: false, follow: true } };
+    const categoryPath = categoryItem?.urls?.[lang]
+      ? buildLocalizedPath(lang, categoryItem.urls[lang])
+      : null;
+
+    return {
+      ...metadata,
+      robots: { index: false, follow: true },
+      ...(categoryPath ? { alternates: { canonical: categoryPath } } : {}),
+    };
   }
 
   return getRouteMetadata(item, lang, null);

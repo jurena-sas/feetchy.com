@@ -18,10 +18,14 @@ const Banners = ({ lang = 'fr', initialItems = [] }) => {
                         <div className="row">
                             <div className="col-lg-6 col-md-6 col-sm-6 col-xs-12">
                                 <div className="single-banner banner_img_3 home-banner-square">
-                                    <Link href={items[0].url}>
+                                    <Link href={items[0].url} title={items[0].label}>
                                         <img
                                             src={`${UPLOADS_BASE}/${items[0].image}`}
                                             alt={items[0].label}
+                                            title={items[0].label}
+                                            onError={(e) => {
+                                                e.currentTarget.style.display = 'none';
+                                            }}
                                         />
                                         {items[0].label && (
                                             <span className="banner-label">
@@ -34,10 +38,14 @@ const Banners = ({ lang = 'fr', initialItems = [] }) => {
 
                             <div className="col-lg-6 col-md-6 col-sm-6 col-xs-12">
                                 <div className="single-banner home-banner-square">
-                                    <Link href={items[1].url}>
+                                    <Link href={items[1].url} title={items[1].label}>
                                         <img
                                             src={`${UPLOADS_BASE}/${items[1].image}`}
                                             alt={items[1].label}
+                                            title={items[1].label}
+                                            onError={(e) => {
+                                                e.currentTarget.style.display = 'none';
+                                            }}
                                         />
                                         {items[1].label && (
                                             <span className="banner-label">
@@ -52,10 +60,14 @@ const Banners = ({ lang = 'fr', initialItems = [] }) => {
                         <div className="row">
                             <div className="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                                 <div className="single-banner mar_b-30 home-banner-wide">
-                                    <Link href={items[2].url}>
+                                    <Link href={items[2].url} title={items[2].label}>
                                         <img
                                             src={`${UPLOADS_BASE}/${items[2].image}`}
                                             alt={items[2].label}
+                                            title={items[2].label}
+                                            onError={(e) => {
+                                                e.currentTarget.style.display = 'none';
+                                            }}
                                         />
                                         {items[2].label && (
                                             <span className="banner-label">
@@ -70,10 +82,14 @@ const Banners = ({ lang = 'fr', initialItems = [] }) => {
 
                     <div className="col-lg-4 col-md-4 col-sm-6 hidden-sm col-xs-12">
                         <div className="single-banner fix home-banner-tall">
-                            <Link href={items[3].url}>
+                            <Link href={items[3].url} title={items[3].label}>
                                 <img
                                     src={`${UPLOADS_BASE}/${items[3].image}`}
                                     alt={items[3].label}
+                                    title={items[3].label}
+                                    onError={(e) => {
+                                        e.currentTarget.style.display = 'none';
+                                    }}
                                 />
                                 {items[3].label && (
                                     <span className="banner-label">

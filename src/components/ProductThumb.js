@@ -52,15 +52,23 @@ const ProductThumb = ({ item, lang = defaultLang }) => {
     return (
         <div className="single-new-product mt-40 category-new-product">
             <div className="product-img">
-                <Link href={productLink}>
+                <Link href={productLink} title={title}>
                     {firstImage ? (
-                        <img src={firstImage} className="first_img" alt={title} />
+                        <img
+                            src={firstImage}
+                            className="first_img"
+                            alt={title}
+                            title={title}
+                            onError={(e) => {
+                                e.currentTarget.style.display = 'none';
+                            }}
+                        />
                     ) : null}
                 </Link>
             </div>
 
             <div className="product-content text-center">
-                <Link href={productLink}>
+                <Link href={productLink} title={title}>
                     <h3>{title}</h3>
                 </Link>
 

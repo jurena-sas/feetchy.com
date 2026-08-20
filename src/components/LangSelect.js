@@ -17,34 +17,34 @@ const LangSelect = ({ lang = defaultLang }) => {
         <>
             <div className="dropdown header-left-menu header-left-menu-lang">
                 <div className="header-left-menu-avtive">
-                    <img src={current.flag} alt={current.label} /> {current.label}{' '}
+                    <img src={current.flag} alt={current.label} title={current.label} /> {current.label}{' '}
                     <i className="fa fa-angle-down"></i>
                 </div>
 
                 <ul className="dropdown-menu">
                     <li>
-                        <Link href={buildHomePath('fr')}>
-                            <img src="/assets/img/flag_fr.png" alt="Français" /> Français
+                        <Link href={buildHomePath('fr')} title="Français">
+                            <img src="/assets/img/flag_fr.png" alt="Français" title="Français" /> Français
                         </Link>
                     </li>
                     <li>
-                        <Link href={buildHomePath('en')}>
-                            <img src="/assets/img/flag_en.png" alt="English" /> English
+                        <Link href={buildHomePath('en')} title="English">
+                            <img src="/assets/img/flag_en.png" alt="English" title="English" /> English
                         </Link>
                     </li>
                     <li>
-                        <Link href={buildHomePath('it')}>
-                            <img src="/assets/img/flag_it.png" alt="Italiano" /> Italiano
+                        <Link href={buildHomePath('it')} title="Italiano">
+                            <img src="/assets/img/flag_it.png" alt="Italiano" title="Italiano" /> Italiano
                         </Link>
                     </li>
                     <li>
-                        <Link href={buildHomePath('de')}>
-                            <img src="/assets/img/flag_de.png" alt="Deutsch" /> Deutsch
+                        <Link href={buildHomePath('de')} title="Deutsch">
+                            <img src="/assets/img/flag_de.png" alt="Deutsch" title="Deutsch" /> Deutsch
                         </Link>
                     </li>
                     <li>
-                        <Link href={buildHomePath('es')}>
-                            <img src="/assets/img/flag_es.png" alt="Español" /> Español
+                        <Link href={buildHomePath('es')} title="Español">
+                            <img src="/assets/img/flag_es.png" alt="Español" title="Español" /> Español
                         </Link>
                     </li>
                 </ul>

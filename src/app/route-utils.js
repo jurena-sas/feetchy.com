@@ -1,4 +1,4 @@
-import { allowedLangs, defaultLang, normalizePath } from '@/src/config';
+import { allowedLangs, buildLocalizedPath, defaultLang, normalizePath } from '@/src/config';
 
 export const fetchFeetchyRoutes = async () => {
   try {
@@ -70,6 +70,42 @@ export const findRouteItemWithSize = (items, lang = defaultLang, slug = '') => {
 
 export const getRouteLabel = (item, lang = defaultLang) =>
   item?.label?.[lang] || item?.label?.[defaultLang] || '';
+
+// Builds the `alternates.canonical` / `alternates.languages` (hreflang) pair
+// from a { lang: path } map, restricted to the languages this site actually
+// serves (allowedLangs). Paths are relative — resolved against metadataBase.
+export const buildAlternates = (pathsByLang = {}, currentLang = defaultLang) => {
+  const languages = {};
+
+  allowedLangs.forEach((l) => {
+    if (pathsByLang[l]) {
+      languages[l] = pathsByLang[l];
+    }
+  });
+
+  if (Object.keys(languages).length === 0) return null;
+
+  return {
+    canonical: languages[currentLang] || pathsByLang[currentLang] || undefined,
+    languages,
+  };
+};
+
+// Same as buildAlternates, but derived from a CMS route item's per-lang
+// `urls` map (as returned by urls_feetchy.json / fetchFeetchyRoutes()).
+export const buildItemAlternates = (item, currentLang = defaultLang) => {
+  if (!item?.urls) return null;
+
+  const pathsByLang = {};
+  allowedLangs.forEach((l) => {
+    const rawUrl = item.urls[l];
+    if (rawUrl) {
+      pathsByLang[l] = buildLocalizedPath(l, rawUrl);
+    }
+  });
+
+  return buildAlternates(pathsByLang, currentLang);
+};
 
 // seoMeta = { seoFeetchy, titleFeetchy, isProduct } from fetchSeoMetaForItem().
 // content_seo_feetchy only wins when actually filled in for that language —

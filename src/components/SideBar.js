@@ -16,16 +16,16 @@ const SideBar = ({
     lang = defaultLang,
     categoryId = null,
     categorySlug = '',
+    categoryTitle = '',
     items = [],
     sidebarImage = '',
     sidebarHtml = '',
     showSizeList = true,
 }) => {
     const [mobileOpen, setMobileOpen] = useState(false);
+    const [imageBroken, setImageBroken] = useState(false);
 
-    const imageUrl = sidebarImage
-        ? `/uploads/${sidebarImage}`
-        : 'img/ads/1.jpg';
+    const imageUrl = sidebarImage ? `/uploads/${sidebarImage}` : '';
 
     const linkUrl = categorySlug ? `/${cleanUrl(categorySlug)}` : '#';
 
@@ -49,13 +49,20 @@ const SideBar = ({
 
                 <ColorList lang={lang} />
 
-                <div className="sideber-ads mt-40 mb-30">
-                    <div className="sideber-ads-img">
-                        <a href={linkUrl}>
-                            <img src={imageUrl} alt={categorySlug || 'Feetchy'} />
-                        </a>
+                {imageUrl && !imageBroken && (
+                    <div className="sideber-ads mt-40 mb-30">
+                        <div className="sideber-ads-img">
+                            <a href={linkUrl} title={categoryTitle || 'Feetchy'}>
+                                <img
+                                    src={imageUrl}
+                                    alt={categoryTitle || 'Feetchy'}
+                                    title={categoryTitle || 'Feetchy'}
+                                    onError={() => setImageBroken(true)}
+                                />
+                            </a>
+                        </div>
                     </div>
-                </div>
+                )}
 
                 {sidebarHtml && (
                     <div

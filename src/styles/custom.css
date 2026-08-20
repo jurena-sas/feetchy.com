@@ -6,11 +6,38 @@ a {
 .selector-input {
     border: none;
     background: #f2f2f2;
+    padding: 10px;
+}
+
+select.selector-input {
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    padding-left: 30px;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6' viewBox='0 0 10 6'%3E%3Cpath d='M1 1l4 4 4-4' stroke='%23333' stroke-width='1.5' fill='none' fill-rule='evenodd'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: left 10px center;
+}
+
+.sort-by label {
+    margin-right: 12px;
+}
+
+.header-top-promo {
+    color: #7aa943;
+}
+
+@media (min-width: 768px) and (max-width: 1199px) {
+    .container {
+        width: 90%;
+        max-width: 90%;
+    }
 }
 
 @media (max-width: 767px) {
     .container {
         width: 100%;
+        max-width: 100%;
     }
   .slide-caption h1 {
     display: block !important;
@@ -240,7 +267,6 @@ a:active {
 
 .shop-cart {
     position: relative;
-    margin-top: -10px;
 }
 
 @media (min-width: 1200px) {
@@ -560,13 +586,13 @@ header .shop-cart a {
 }
 
 .slider-btn>a {
-    background: #e73b8b none repeat scroll 0 0 !important;
+    background: #bea471 none repeat scroll 0 0 !important;
     color: #ffffff !important;
     display: inline-block;
     font-size: 13px;
     font-weight: 900;
     line-height: 42px;
-    padding: 8px 30px !important;
+    padding: 0px 30px !important;
     text-transform: uppercase;
     vertical-align: top;
     border-radius: 50px;

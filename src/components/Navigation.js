@@ -76,6 +76,7 @@ const Navigation = ({ lang = defaultLang }) => {
                                                         lang,
                                                         url
                                                     )}
+                                                    title={label}
                                                 >
                                                     {label}
                                                 </Link>
@@ -95,6 +96,7 @@ const Navigation = ({ lang = defaultLang }) => {
                                                                             lang,
                                                                             subUrl
                                                                         )}
+                                                                        title={subLabel}
                                                                     >
                                                                         {subLabel}
                                                                     </Link>

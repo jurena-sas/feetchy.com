@@ -106,7 +106,14 @@ const PromoPopup = ({ discount, lang = defaultLang }) => {
                 <div className="promo-popup-content">
                     {imageUrl ? (
                         <div className="promo-popup-image">
-                            <img src={imageUrl} alt={title || 'Promotion'} />
+                            <img
+                                src={imageUrl}
+                                alt={title || 'Promotion'}
+                                title={title || 'Promotion'}
+                                onError={(e) => {
+                                    e.currentTarget.parentElement.style.display = 'none';
+                                }}
+                            />
                         </div>
                     ) : null}
 

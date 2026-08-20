@@ -53,6 +53,7 @@ const PostFeetchy = ({ id, lang = defaultLang, initialContentData = null }) => {
                                     <img
                                         src={imageUrl}
                                         alt={title || 'Article image'}
+                                        title={title || 'Article image'}
                                         className="img-fluid"
                                         onError={(e) => {
                                             e.currentTarget.style.display = 'none';

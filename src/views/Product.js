@@ -218,12 +218,17 @@ const Product = ({
                                             <a
                                                 className="image-link"
                                                 href={selectedImage}
+                                                title={title}
                                                 onClick={(e) => e.preventDefault()}
                                             >
                                                 <img
                                                     src={selectedImage}
                                                     className="first_img"
                                                     alt={title}
+                                                    title={title}
+                                                    onError={(e) => {
+                                                        e.currentTarget.style.display = "none";
+                                                    }}
                                                 />
                                             </a>
                                         </div>
@@ -238,8 +243,16 @@ const Product = ({
                                                         type="button"
                                                         onClick={() => setSelectedImageIndex(index)}
                                                         className="product-thumb-btn"
+                                                        title={title}
                                                     >
-                                                        <img src={img} alt={title} />
+                                                        <img
+                                                            src={img}
+                                                            alt={title}
+                                                            title={title}
+                                                            onError={(e) => {
+                                                                e.currentTarget.style.display = "none";
+                                                            }}
+                                                        />
                                                     </button>
                                                 </li>
                                             ))}

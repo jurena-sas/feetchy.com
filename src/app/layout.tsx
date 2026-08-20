@@ -1,7 +1,12 @@
+import type { Metadata } from "next";
 import type { ReactNode } from "react";
 import Providers from "../providers";
 
 import "./globals.css";
+
+export const metadata: Metadata = {
+  metadataBase: new URL("https://www.feetchy.com"),
+};
 
 import "../styles/style.css";
 import "../styles/responsive.css";

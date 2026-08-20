@@ -16,6 +16,12 @@ const textByLang = {
     de: 'Mein Konto',
     es: 'Mi cuenta',
   },
+  cartLabel: {
+    fr: 'Mon panier',
+    en: 'My cart',
+    it: 'Il mio carrello',
+    de: 'Mein Warenkorb',
+  },
   items: {
     fr: 'articles',
     en: 'items',
@@ -92,12 +98,16 @@ const HeaderCart = ({ lang = defaultLang }) => {
 
   return (
     <div className="header-bottom-right header-bottom-right-2">
-      <Link href={accountPath} className="header-account-link hidden-xs">
+      <Link
+        href={accountPath}
+        className="header-account-link hidden-md hidden-sm hidden-xs"
+        title={getText(lang, 'account', 'Mon compte')}
+      >
         {getText(lang, 'account', 'Mon compte')}
       </Link>
 
       <div className="shop-cart">
-        <Link href={cartPath}>
+        <Link href={cartPath} title={getText(lang, 'cartLabel', 'Mon panier')}>
           <span className={`lnr lnr-cart${pulse ? ' cart-pulse' : ''}`}></span>{' '}
           ({totalItems}{''})
         </Link>
@@ -112,14 +122,21 @@ const HeaderCart = ({ lang = defaultLang }) => {
                 return (
                 <li key={`${item.id}-${item.referenceIndex ?? 0}`}>
                   <div className="cart-img">
-                    <Link href={cartPath}>
-                      <img src={item.image} alt={itemName} />
+                    <Link href={cartPath} title={itemName}>
+                      <img
+                        src={item.image}
+                        alt={itemName}
+                        title={itemName}
+                        onError={(e) => {
+                          e.currentTarget.style.display = 'none';
+                        }}
+                      />
                     </Link>
                   </div>
 
                   <div className="cart-content">
                     <h4>
-                      <Link href={cartPath}>
+                      <Link href={cartPath} title={itemName}>
                         {item.quantity} x {itemName}
                       </Link>
                     </h4>
@@ -169,7 +186,7 @@ const HeaderCart = ({ lang = defaultLang }) => {
               </li>
 
               <li className="checkout-bg">
-                <Link href={checkoutPath}>
+                <Link href={checkoutPath} title={getText(lang, 'checkout', 'Paiement')}>
                   {getText(lang, 'checkout', 'Paiement')} <i className="fa fa-angle-right"></i>
                 </Link>
               </li>

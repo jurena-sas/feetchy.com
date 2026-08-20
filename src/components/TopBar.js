@@ -53,7 +53,7 @@ const TopBar = ({ lang = defaultLang }) => {
                         {freeShippingText}
                         {promoText && (
                             <>
-                                {' '} / {promoText}
+                                {' '} / <span className="header-top-promo">{promoText}</span>
                             </>
                         )}
                     </div>

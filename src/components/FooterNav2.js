@@ -43,14 +43,17 @@ const FooterNav2 = ({ lang = defaultLang }) => {
 
             return (
               <li key={item.id}>
-                <Link href={buildLocalizedPath(lang, rawUrl)}>
+                <Link href={buildLocalizedPath(lang, rawUrl)} title={label}>
                   {label}
                 </Link>
               </li>
             );
           })}
           <li>
-            <Link href={buildLocalizedPath(lang, "sitemap")}>
+            <Link
+              href={buildLocalizedPath(lang, "sitemap")}
+              title={getLocalizedValue(sitemapLabels, lang, "Plan du site")}
+            >
               {getLocalizedValue(sitemapLabels, lang, "Plan du site")}
             </Link>
           </li>

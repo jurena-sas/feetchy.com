@@ -36,11 +36,16 @@ const Home = ({
 
             <Header lang={currentLang} />
             <Slider lang={currentLang} initialSlides={initialSlides} />
+            <div className="hidden-xs">
+                <Services lang={currentLang} />
+            </div>
             <NewProducts lang={currentLang} initialItems={initialNewProductItems} />
             <Banners lang={currentLang} initialItems={initialBannerItems} />
             <BlogLatest lang={currentLang} initialRawItems={initialBlogRawItems} />
             <SeoHome initialHtml={initialSeoHtml} />
-            <Services lang={currentLang} />
+            <div className="visible-xs-block">
+                <Services lang={currentLang} />
+            </div>
             <Footer lang={currentLang} />
         </div>
     );

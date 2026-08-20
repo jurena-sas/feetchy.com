@@ -36,7 +36,7 @@ const FooterNav1 = ({ lang = defaultLang }) => {
 
             return (
               <li key={item.id}>
-                <Link href={buildLocalizedPath(lang, rawUrl)}>
+                <Link href={buildLocalizedPath(lang, rawUrl)} title={label}>
                   {label}
                 </Link>
               </li>

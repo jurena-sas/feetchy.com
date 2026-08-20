@@ -70,7 +70,7 @@ const SizeList = ({
 
                         return (
                             <li key={size.label}>
-                                <Link href={target}>
+                                <Link href={target} title={size.label}>
                                     {size.label}
                                 </Link>
                             </li>

@@ -340,7 +340,11 @@ const Confirm = ({ lang: langProp } = {}) => {
                     {cart.length === 0 ? (
                         <div className="confirm-empty">
                             <p>{getText(currentLang, 'empty', 'Votre panier est vide.')}</p>
-                            <Link href={homePath} className="confirm-empty__link">
+                            <Link
+                                href={homePath}
+                                className="confirm-empty__link"
+                                title={getText(currentLang, 'continueShopping', 'Continuer mes achats')}
+                            >
                                 {getText(currentLang, 'continueShopping', 'Continuer mes achats')}
                             </Link>
                         </div>
@@ -442,7 +446,11 @@ const Confirm = ({ lang: langProp } = {}) => {
                                                         <img
                                                             src={item.image}
                                                             alt={itemName}
+                                                            title={itemName}
                                                             className="confirm-product__image"
+                                                            onError={(e) => {
+                                                                e.currentTarget.style.display = "none";
+                                                            }}
                                                         />
                                                     ) : (
                                                         <div className="confirm-product__placeholder" />

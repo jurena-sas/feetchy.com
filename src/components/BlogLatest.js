@@ -165,10 +165,11 @@ const BlogLatest = ({ lang = 'fr', initialRawItems = [] }) => {
                                 <div className="single-blog">
                                     {post.image ? (
                                         <div className="blog-img">
-                                            <a href={post.url}>
+                                            <a href={post.url} title={post.title}>
                                                 <img
                                                     src={post.image}
                                                     alt={post.title}
+                                                    title={post.title}
                                                     onError={(e) => {
                                                         e.currentTarget.style.display = 'none';
                                                     }}
@@ -178,13 +179,13 @@ const BlogLatest = ({ lang = 'fr', initialRawItems = [] }) => {
                                     ) : null}
 
                                     <div className="blog-info">
-                                        <a href={post.url}>
+                                        <a href={post.url} title={post.title}>
                                             <h2>{post.title}</h2>
                                         </a>
 
                                         <p>{post.excerpt}</p>
 
-                                        <a href={post.url}>
+                                        <a href={post.url} title={post.title}>
                                             {text.readMore} <span className="lnr lnr-arrow-right"></span>
                                         </a>
                                     </div>

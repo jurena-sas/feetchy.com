@@ -54,7 +54,7 @@ const SitemapSection = ({ title, items = [], lang }) => {
       <ul className="sitemap-list">
         {items.map((item) => (
           <li key={item.id}>
-            <Link href={buildLocalizedPath(lang, item.url)}>{item.title}</Link>
+            <Link href={buildLocalizedPath(lang, item.url)} title={item.title}>{item.title}</Link>
           </li>
         ))}
       </ul>
@@ -107,7 +107,7 @@ const Sitemap = ({
                   <ul className="sitemap-list">
                     {group.items.map((item) => (
                       <li key={item.id}>
-                        <Link href={buildLocalizedPath(lang, item.url)}>{item.title}</Link>
+                        <Link href={buildLocalizedPath(lang, item.url)} title={item.title}>{item.title}</Link>
                       </li>
                     ))}
                   </ul>

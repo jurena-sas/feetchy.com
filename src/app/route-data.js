@@ -3,6 +3,8 @@
 // client-side. These run in Server Components (no CORS concerns) and
 // hit laceter.com directly.
 
+import { HOME_CONTENT_ID } from '@/src/config';
+
 const API_BASE = 'https://www.laceter.com/api';
 
 const safeFetchJson = async (url) => {
@@ -211,6 +213,50 @@ export const fetchSitemapData = async (lang) => {
     productGroups: productGroupList,
     posts: sortByTitle(mapAndFilter(posts?.items), lang),
   };
+};
+
+// Flat, all-languages entries for the XML sitemap (sitemap.ts) — each entry
+// carries its per-lang path map so hreflang alternates can be generated.
+export const fetchSitemapXmlEntries = async () => {
+  const [pages, categories, colors, products, posts] = await Promise.all([
+    safeFetchJson(`${API_BASE}/list.page_feetchy.json`),
+    safeFetchJson(`${API_BASE}/list.category.json`),
+    safeFetchJson(`${API_BASE}/list.color.json`),
+    safeFetchJson(`${API_BASE}/list.product.json`),
+    safeFetchJson(`${API_BASE}/list.post_feetchy.json`),
+  ]);
+
+  const isVisible = (item) =>
+    SITEMAP_STATUT_ALLOWED.includes(item?.content?.content_statut);
+
+  const toEntry = (item) => {
+    const urlByLang = item?.metas?.content_url_feetchy || {};
+    if (!urlByLang.fr && !urlByLang.en && !urlByLang.it && !urlByLang.de) return null;
+
+    return {
+      id: `${item?.content_type || item?.content?.content_type}-${item.id}`,
+      urlByLang,
+    };
+  };
+
+  const collect = (items) =>
+    (items || [])
+      .filter(isVisible)
+      .map(toEntry)
+      .filter(Boolean);
+
+  // The home content item is already represented by the static "" entry
+  // in sitemap.ts — its own content_url_feetchy.fr is empty (root path),
+  // which would otherwise produce a broken "/en/en"-style duplicate URL.
+  const nonHomePages = (pages?.items || []).filter((item) => item.id !== HOME_CONTENT_ID);
+
+  return [
+    ...collect(nonHomePages),
+    ...collect(categories?.items),
+    ...collect(colors?.items),
+    ...collect(products?.items),
+    ...collect(posts?.items),
+  ];
 };
 
 export const pickRandomProducts = (items, lang, count = 6) => {

@@ -43,6 +43,10 @@ const Slider = ({ lang = "fr", initialSlides = [] }) => {
                     <img
                       src={`${UPLOADS_BASE}/${image}`}
                       alt={content?.content_1 || `slide-${index + 1}`}
+                      title={content?.content_1 || `slide-${index + 1}`}
+                      onError={(e) => {
+                        e.currentTarget.style.display = "none";
+                      }}
                     />
                   </div>
                 )}
@@ -65,7 +69,7 @@ const Slider = ({ lang = "fr", initialSlides = [] }) => {
 
                   {content?.btn_1_title && (
                     <div className="slider-btn home-2 wow bounceInUp">
-                      <Link href={buttonUrl}>{content.btn_1_title}</Link>
+                      <Link href={buttonUrl} title={content.btn_1_title}>{content.btn_1_title}</Link>
                     </div>
                   )}
                 </div>

@@ -423,7 +423,11 @@ const Checkout = ({ lang: langProp } = {}) => {
           {cart.length === 0 ? (
             <div className="checkout-empty">
               <p>{getText(currentLang, 'empty', 'Votre panier est vide.')}</p>
-              <Link href={homePath} className="checkout-empty__link">
+              <Link
+                href={homePath}
+                className="checkout-empty__link"
+                title={getText(currentLang, 'continueShopping', 'Continuer mes achats')}
+              >
                 {getText(currentLang, 'continueShopping', 'Continuer mes achats')}
               </Link>
             </div>

@@ -174,7 +174,11 @@ const Cart = ({ lang: langProp } = {}) => {
           {cart.length === 0 ? (
             <div className="cart-empty">
               <p>{getText(currentLang, 'empty', 'Votre panier est vide.')}</p>
-              <Link href={homePath} className="cart-empty__link">
+              <Link
+                href={homePath}
+                className="cart-empty__link"
+                title={getText(currentLang, 'continueShopping', 'Continuer mes achats')}
+              >
                 {getText(currentLang, 'continueShopping', 'Continuer mes achats')}
               </Link>
             </div>
@@ -214,7 +218,11 @@ const Cart = ({ lang: langProp } = {}) => {
                             <img
                               src={item.image}
                               alt={itemName}
+                              title={itemName}
                               className="cart-product__image"
+                              onError={(e) => {
+                                e.currentTarget.style.display = 'none';
+                              }}
                             />
                           ) : (
                             <div className="cart-product__placeholder" />
@@ -371,7 +379,11 @@ const Cart = ({ lang: langProp } = {}) => {
                   </p>
                 </div>
 
-                <Link href={checkoutPath} className="cart-summary__checkout">
+                <Link
+                  href={checkoutPath}
+                  className="cart-summary__checkout"
+                  title={getText(currentLang, 'checkout', 'Je passe ma commande')}
+                >
                   {getText(currentLang, 'checkout', 'Je passe ma commande')}
                 </Link>
               </aside>

@@ -81,6 +81,7 @@ const Category = ({
                                 lang={lang}
                                 categoryId={id}
                                 categorySlug={categorySlug}
+                                categoryTitle={categoryTitle}
                                 items={visibleItems}
                                 sidebarImage={sidebarImage}
                                 sidebarHtml={sidebarHtml}

@@ -12,7 +12,7 @@ const Footer = ({ lang = defaultLang }) => {
                     <div className="col-lg-3 col-md-5 col-sm-6 col-xs-12 mar_b-30">
                         <div className="footer-wrapper">
                             <div className="footer-logo">
-                                <img src="/assets/img/logo-n.png" alt="Logo" />
+                                <img src="/assets/img/logo-n.png" alt="Feetchy" title="Feetchy" />
                             </div>
                             <p>Feetchy propose des lacets de qualité, pensés pour sublimer vos chaussures au quotidien. Styles, couleurs et finitions soignées pour donner une nouvelle vie à chaque paire.</p>
                         </div>

@@ -49,11 +49,12 @@ const Header = ({ lang = defaultLang }) => {
 
                             <div className="col-lg-6 col-md-6 col-sm-6 col-xs-12">
 
-                                <Link href={buildHomePath(lang)}>
+                                <Link href={buildHomePath(lang)} title="Feetchy">
                                     <div className="logo logo2">
                                         <img
                                             src="/assets/img/logo.png"
-                                            alt="Logo"
+                                            alt="Feetchy"
+                                            title="Feetchy"
                                         />
                                     </div>
                                 </Link>
