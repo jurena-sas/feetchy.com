@@ -73,9 +73,7 @@ export const fetchHomeSlides = async (homeContent) => {
   return Promise.all(
     rawSlides.map(async (slide) => {
       const langs = ['fr', 'en', 'it', 'de', 'es'];
-      const targetId = langs
-        .map((l) => slide?.[l]?.btn_1_target)
-        .find(Boolean);
+      const targetId = slide?.btn_1_target;
 
       if (!targetId) {
         return { ...slide, buttonUrls: {} };
