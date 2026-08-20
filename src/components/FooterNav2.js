@@ -10,6 +10,7 @@ const sitemapLabels = {
   en: "Sitemap",
   it: "Mappa del sito",
   de: "Seitenplan",
+  es: "Mapa del sitio",
 };
 
 const FooterNav2 = ({ lang = defaultLang }) => {

@@ -10,6 +10,7 @@ export const metadata = {
       en: '/en/confirm',
       it: '/it/confirm',
       de: '/de/confirm',
+      es: '/es/confirm',
     },
   },
 };

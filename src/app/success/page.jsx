@@ -11,6 +11,7 @@ export const metadata = {
       en: '/en/success',
       it: '/it/success',
       de: '/de/success',
+      es: '/es/success',
     },
   },
 };

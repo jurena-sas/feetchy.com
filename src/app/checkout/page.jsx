@@ -10,6 +10,7 @@ export const metadata = {
       en: '/en/checkout',
       it: '/it/checkout',
       de: '/de/checkout',
+      es: '/es/checkout',
     },
   },
 };

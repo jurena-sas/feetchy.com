@@ -10,6 +10,7 @@ export const metadata = {
       en: '/en/account',
       it: '/it/account',
       de: '/de/account',
+      es: '/es/account',
     },
   },
 };

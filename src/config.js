@@ -1,4 +1,4 @@
-export const allowedLangs = ['fr', 'en', 'it', 'de'];
+export const allowedLangs = ['fr', 'en', 'it', 'de', 'es'];
 export const defaultLang = 'fr';
 
 // Content id where content_type = page_feetchy and content_statut = home

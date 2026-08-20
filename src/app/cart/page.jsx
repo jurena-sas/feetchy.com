@@ -10,6 +10,7 @@ export const metadata = {
       en: '/en/cart',
       it: '/it/cart',
       de: '/de/cart',
+      es: '/es/cart',
     },
   },
 };

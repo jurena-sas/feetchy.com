@@ -35,6 +35,10 @@ const sitemapMetadataByLang = {
     title: 'Seitenplan | Feetchy',
     description: 'Finden Sie alle Feetchy-Seiten, Kategorien, Farben und Produkte auf unserem Seitenplan.',
   },
+  es: {
+    title: 'Mapa del sitio | Feetchy',
+    description: 'Encuentra todas las páginas, categorías, colores y productos Feetchy en nuestro mapa del sitio.',
+  },
 };
 
 const staticPageMetadataByLang = {
@@ -43,30 +47,35 @@ const staticPageMetadataByLang = {
     en: { title: 'My cart | Feetchy', description: 'Review and edit your Feetchy cart before checking out.' },
     it: { title: 'Il mio carrello | Feetchy', description: 'Consulta e modifica il contenuto del tuo carrello Feetchy prima di ordinare.' },
     de: { title: 'Mein Warenkorb | Feetchy', description: 'Überprüfen und ändern Sie Ihren Feetchy-Warenkorb vor dem Bezahlen.' },
+    es: { title: 'Mi carrito | Feetchy', description: 'Consulta y edita el contenido de tu carrito Feetchy antes de pagar.' },
   },
   checkout: {
     fr: { title: 'Livraison | Feetchy', description: 'Renseignez vos informations de livraison pour finaliser votre commande Feetchy.' },
     en: { title: 'Shipping | Feetchy', description: 'Enter your shipping details to complete your Feetchy order.' },
     it: { title: 'Consegna | Feetchy', description: 'Inserisci i tuoi dati di consegna per completare il tuo ordine Feetchy.' },
     de: { title: 'Versand | Feetchy', description: 'Geben Sie Ihre Lieferdaten ein, um Ihre Feetchy-Bestellung abzuschließen.' },
+    es: { title: 'Envío | Feetchy', description: 'Introduce tus datos de envío para completar tu pedido Feetchy.' },
   },
   confirm: {
     fr: { title: 'Confirmation de commande | Feetchy', description: 'Vérifiez le récapitulatif de votre commande Feetchy avant paiement.' },
     en: { title: 'Order confirmation | Feetchy', description: 'Review your Feetchy order summary before payment.' },
     it: { title: 'Conferma ordine | Feetchy', description: 'Verifica il riepilogo del tuo ordine Feetchy prima del pagamento.' },
     de: { title: 'Bestellbestätigung | Feetchy', description: 'Überprüfen Sie Ihre Feetchy-Bestellübersicht vor der Zahlung.' },
+    es: { title: 'Confirmación de pedido | Feetchy', description: 'Revisa el resumen de tu pedido Feetchy antes de pagar.' },
   },
   success: {
     fr: { title: 'Commande confirmée | Feetchy', description: 'Votre commande Feetchy a bien été enregistrée.' },
     en: { title: 'Order confirmed | Feetchy', description: 'Your Feetchy order has been successfully placed.' },
     it: { title: 'Ordine confermato | Feetchy', description: 'Il tuo ordine Feetchy è stato registrato con successo.' },
     de: { title: 'Bestellung bestätigt | Feetchy', description: 'Ihre Feetchy-Bestellung wurde erfolgreich aufgegeben.' },
+    es: { title: 'Pedido confirmado | Feetchy', description: 'Tu pedido Feetchy se ha registrado correctamente.' },
   },
   account: {
     fr: { title: 'Mon compte | Feetchy', description: 'Connectez-vous à votre compte Feetchy pour suivre vos commandes et télécharger vos factures.' },
     en: { title: 'My account | Feetchy', description: 'Sign in to your Feetchy account to track orders and download invoices.' },
     it: { title: 'Il mio account | Feetchy', description: 'Accedi al tuo account Feetchy per seguire gli ordini e scaricare le fatture.' },
     de: { title: 'Mein Konto | Feetchy', description: 'Melden Sie sich bei Ihrem Feetchy-Konto an, um Bestellungen zu verfolgen und Rechnungen herunterzuladen.' },
+    es: { title: 'Mi cuenta | Feetchy', description: 'Accede a tu cuenta Feetchy para seguir tus pedidos y descargar tus facturas.' },
   },
 };
 
@@ -75,6 +84,7 @@ const staticPageAlternatePaths = (slug) => ({
   en: `/en/${slug}`,
   it: `/it/${slug}`,
   de: `/de/${slug}`,
+  es: `/es/${slug}`,
 });
 
 const parseSegments = (segments = []) => {
@@ -93,7 +103,7 @@ export async function generateMetadata({ params }) {
 
   if (!slug) {
     const homeMeta = await fetchHomeMetadata(lang, HOME_CONTENT_ID);
-    const alternates = buildAlternates({ fr: '/', en: '/en', it: '/it', de: '/de' }, lang);
+    const alternates = buildAlternates({ fr: '/', en: '/en', it: '/it', de: '/de', es: '/es' }, lang);
     return alternates ? { ...homeMeta, alternates } : homeMeta;
   }
 

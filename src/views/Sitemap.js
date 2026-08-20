@@ -12,36 +12,42 @@ const textByLang = {
     en: 'Sitemap',
     it: 'Mappa del sito',
     de: 'Seitenplan',
+    es: 'Mapa del sitio',
   },
   pages: {
     fr: 'Nos pages',
     en: 'Our pages',
     it: 'Le nostre pagine',
     de: 'Unsere Seiten',
+    es: 'Nuestras páginas',
   },
   categories: {
     fr: 'Catégories',
     en: 'Categories',
     it: 'Categorie',
     de: 'Kategorien',
+    es: 'Categorías',
   },
   colors: {
     fr: 'Couleurs',
     en: 'Colors',
     it: 'Colori',
     de: 'Farben',
+    es: 'Colores',
   },
   products: {
     fr: 'Produits',
     en: 'Products',
     it: 'Prodotti',
     de: 'Produkte',
+    es: 'Productos',
   },
   posts: {
     fr: 'Articles de blog',
     en: 'Blog posts',
     it: 'Articoli del blog',
     de: 'Blogartikel',
+    es: 'Artículos del blog',
   },
 };
 

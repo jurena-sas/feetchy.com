@@ -13,18 +13,21 @@ const textByLang = {
         en: 'Order confirmed',
         it: 'Ordine confermato',
         de: 'Bestellung bestätigt',
+        es: 'Pedido confirmado',
     },
     message: {
         fr: 'Merci pour votre commande. Elle a bien été enregistrée et un e-mail de confirmation vient de vous être envoyé.',
         en: 'Thank you for your order. It has been successfully registered and a confirmation email has been sent to you.',
         it: 'Grazie per il tuo ordine. È stato registrato correttamente e ti è stata inviata un’e-mail di conferma.',
         de: 'Vielen Dank für Ihre Bestellung. Sie wurde erfolgreich erfasst und eine Bestätigungs-E-Mail wurde an Sie gesendet.',
+        es: 'Gracias por tu pedido. Se ha registrado correctamente y se te ha enviado un correo de confirmación.',
     },
     reference: {
         fr: 'Votre référence de commande est :',
         en: 'Your order reference is:',
         it: 'Il riferimento del tuo ordine è:',
         de: 'Ihre Bestellreferenz lautet:',
+        es: 'La referencia de tu pedido es:',
     },
 };
 
