@@ -234,6 +234,15 @@ a:active {
   text-decoration: none;
 }
 
+.header-top-infos {
+    font-size: 12px;
+}
+
+.shop-cart {
+    position: relative;
+    margin-top: -10px;
+}
+
 @media (min-width: 1200px) {
   .container {
     width: 1170px;
@@ -330,8 +339,22 @@ header .shop-cart a {
 
 }
 
-.shop-cart a .hidden-xs {
+.header-bottom-right-2 {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 14px;
+}
+
+.header-account-link {
+    padding-right: 14px;
+    border-right: 1px solid #ddd;
+    color: #444444;
     font-size: 14px;
+}
+
+.header-account-link:hover {
+    color: #c2a773;
 }
 
 @media (max-width: 760px) {

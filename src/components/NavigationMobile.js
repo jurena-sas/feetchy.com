@@ -3,8 +3,16 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import Link from 'next/link';
-import { buildLocalizedPath, defaultLang } from '../config.js';
+import { buildLocalizedPath, defaultLang, getLocalizedValue } from '../config.js';
 import LangSelect from './LangSelect.js';
+
+const accountLabels = {
+    fr: 'Mon compte',
+    en: 'My account',
+    it: 'Il mio account',
+    de: 'Mein Konto',
+    es: 'Mi cuenta',
+};
 
 const NavigationMobile = ({ lang = defaultLang, mobileOpen, setMobileOpen }) => {
     const [items, setItems] = useState([]);
@@ -59,6 +67,14 @@ const NavigationMobile = ({ lang = defaultLang, mobileOpen, setMobileOpen }) => 
                                             </li>
                                         );
                                     })}
+                                    <li>
+                                        <Link
+                                            href={buildLocalizedPath(lang, 'account')}
+                                            onClick={() => setMobileOpen(false)}
+                                        >
+                                            {getLocalizedValue(accountLabels, lang, 'Mon compte')}
+                                        </Link>
+                                    </li>
                                 </ul>
                             </nav>
                         </div>

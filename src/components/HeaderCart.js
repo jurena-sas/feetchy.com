@@ -3,17 +3,18 @@
 import React, { useEffect, useRef, useState } from 'react';
 import Link from 'next/link';
 import { useCart } from '../context/CartContext';
-import { defaultLang, getLocalizedValue } from '../config';
+import { buildLocalizedPath, defaultLang, getLocalizedValue } from '../config';
 
 const getItemName = (item, lang) =>
   getLocalizedValue(item?.nameTranslations, lang, item?.name || '');
 
 const textByLang = {
-  cartLabel: {
-    fr: 'Mon panier',
-    en: 'My cart',
-    it: 'Il mio carrello',
-    de: 'Mein Warenkorb',
+  account: {
+    fr: 'Mon compte',
+    en: 'My account',
+    it: 'Il mio account',
+    de: 'Mein Konto',
+    es: 'Mi cuenta',
   },
   items: {
     fr: 'articles',
@@ -73,6 +74,7 @@ const HeaderCart = ({ lang = defaultLang }) => {
 
   const cartPath = lang === defaultLang ? '/cart' : `/${lang}/cart`;
   const checkoutPath = lang === defaultLang ? '/checkout' : `/${lang}/checkout`;
+  const accountPath = buildLocalizedPath(lang, 'account');
 
   const [pulse, setPulse] = useState(false);
   const previousTotal = useRef(totalItems);
@@ -90,10 +92,13 @@ const HeaderCart = ({ lang = defaultLang }) => {
 
   return (
     <div className="header-bottom-right header-bottom-right-2">
+      <Link href={accountPath} className="header-account-link hidden-xs">
+        {getText(lang, 'account', 'Mon compte')}
+      </Link>
+
       <div className="shop-cart">
         <Link href={cartPath}>
           <span className={`lnr lnr-cart${pulse ? ' cart-pulse' : ''}`}></span>{' '}
-          <span className="hidden-xs">{getText(lang, 'cartLabel', 'Mon panier')} </span>
           ({totalItems}{''})
         </Link>
       </div>

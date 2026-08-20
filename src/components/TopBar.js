@@ -1,10 +1,7 @@
 "use client";
 
 import React, { useMemo } from 'react';
-//import Link from 'next/link';
-import Link from "next/link";
 import {
-    buildLocalizedPath,
     defaultLang,
     getLocalizedValue,
     uiTranslations,
@@ -48,20 +45,8 @@ const TopBar = ({ lang = defaultLang }) => {
         return '';
     }, [activeDiscount, lang]);
 
-    const accountLabel = getLocalizedValue(
-        {
-            fr: 'Mon compte',
-            en: 'My account',
-            it: 'Il mio account',
-            de: 'Mein Konto',
-            es: 'Mi cuenta',
-        },
-        lang,
-        'Mon compte'
-    );
-
     return (
-        <div className="header-top-area ptb-10 hidden-xs home-page-2">
+        <div className="header-top-area ptb-10 home-page-2">
             <div className="container">
                 <div className="row header-top-row">
                     <div className="header-top-infos">
@@ -71,13 +56,6 @@ const TopBar = ({ lang = defaultLang }) => {
                                 {' '} / {promoText}
                             </>
                         )}
-                    </div>
-                    <div className="header-top-right">
-                        <ul>
-                            <li>
-                                <Link href={buildLocalizedPath(lang, 'account')}>{accountLabel}</Link>
-                            </li>
-                        </ul>
                     </div>
                 </div>
             </div>
