@@ -56,7 +56,7 @@ a {
 }
 
 .product-simple-area.ptb-80 {
-  padding-top: 0;
+  padding-top: 50px;
 }
 
 @keyframes cart-pulse {
@@ -613,6 +613,10 @@ header .shop-cart a {
 
     .service-icon {
         margin-bottom: -20px;
+    }
+
+    .product-simple-area.ptb-80 {
+        padding-top: 0px;
     }
 
 }
