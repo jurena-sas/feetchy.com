@@ -35,7 +35,7 @@ const CategoryOptions = ({ sortBy, setSortBy, lang = defaultLang }) => {
                         <div className="sort-by">
                             <label>{getLocalizedValue(textByLang.label, lang, 'Afficher par :')}</label>
                             <select
-                                className="cust-select"
+                                className="selector-input"
                                 value={sortBy}
                                 onChange={(e) => setSortBy(e.target.value)}
                             >

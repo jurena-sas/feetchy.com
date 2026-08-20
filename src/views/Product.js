@@ -350,6 +350,7 @@ const Product = ({
                                                 {references.length > 0 && (
                                                     <select
                                                         id="product-reference"
+                                                        className="selector-input"
                                                         value={selectedRefIndex}
                                                         onChange={(e) => {
                                                             const nextIndex = Number(e.target.value);
@@ -365,7 +366,6 @@ const Product = ({
                                                             minWidth: "180px",
                                                             height: "42px",
                                                             padding: "8px 40px 8px 8px",
-                                                            border: "1px solid #ddd",
                                                             appearance: "none",
                                                             WebkitAppearance: "none",
                                                             MozAppearance: "none",
@@ -407,11 +407,11 @@ const Product = ({
                                                     value={quantity}
                                                     onChange={handleQuantityChange}
                                                     disabled={!inStock}
+                                                    className="selector-input"
                                                     style={{
                                                         width: "90px",
                                                         height: "42px",
                                                         padding: "8px",
-                                                        border: "1px solid #ddd",
                                                         textAlign: "center",
                                                     }}
                                                 />
