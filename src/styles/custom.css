@@ -720,21 +720,25 @@ header .shop-cart a {
     font-size: 42px;
     line-height: 1.1;
     font-weight: 700;
+    text-transform: uppercase;
+    color: #679024;
 }
 
 .promo-popup-subtitle {
     margin-bottom: 20px;
     font-size: 24px;
+    color: #262626;
 }
 
 .promo-popup-subtitle strong {
     font-weight: 700;
+    color: #b89c65;
 }
 
 .promo-popup-text p {
-    margin-bottom: 16px;
-    font-size: 18px;
-    color: #333;
+    color: #717171;
+    margin-bottom: 0px;
+    font-size: 13px;
 }
 
 .promo-popup-code {
