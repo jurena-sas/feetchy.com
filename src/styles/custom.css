@@ -749,8 +749,20 @@ header .shop-cart a {
 }
 
 @media (max-width: 767px) {
+    .promo-popup-content {
+        flex-direction: column;
+        max-height: 85vh;
+        overflow-y: auto;
+    }
+
+    .promo-popup-image {
+        width: 100%;
+        height: 200px;
+    }
+
     .promo-popup-text {
         padding: 24px 20px;
+        min-width: 0;
     }
 
     .promo-popup-text h2 {
