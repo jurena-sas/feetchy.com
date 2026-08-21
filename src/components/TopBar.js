@@ -6,14 +6,6 @@ import {
     getLocalizedValue,
     uiTranslations,
 } from '../config';
-
-const withCodeLabels = {
-    fr: 'avec le code',
-    en: 'with code',
-    it: 'con il codice',
-    de: 'mit dem Code',
-    es: 'con el código',
-};
 import { useCart } from '../context/CartContext';
 import { useDiscount } from '../context/DiscountContext';
 
@@ -26,8 +18,16 @@ const TopBar = ({ lang = defaultLang }) => {
         lang
     ).replace('{qty}', freeShippingFromQty);
 
-    const promoText = useMemo(() => {
+    const promoHtml = useMemo(() => {
         if (!activeDiscount) return '';
+
+        const subtitle = getLocalizedValue(
+            activeDiscount.discount_subtitle,
+            lang,
+            ''
+        );
+
+        if (subtitle) return subtitle;
 
         const title = getLocalizedValue(
             activeDiscount.discount_title,
@@ -35,23 +35,7 @@ const TopBar = ({ lang = defaultLang }) => {
             ''
         );
 
-        const percent = activeDiscount.discount_percent;
-        const code = activeDiscount.discount_code;
-
-        if (percent && code) {
-            const withCode = getLocalizedValue(withCodeLabels, lang, 'avec le code');
-            return `-${percent}% ${withCode} ${code}`;
-        }
-
-        if (percent) {
-            return `-${percent}%`;
-        }
-
-        if (title) {
-            return title;
-        }
-
-        return '';
+        return title;
     }, [activeDiscount, lang]);
 
     return (
@@ -60,9 +44,13 @@ const TopBar = ({ lang = defaultLang }) => {
                 <div className="row header-top-row">
                     <div className="header-top-infos">
                         {freeShippingText}
-                        {promoText && (
+                        {promoHtml && (
                             <>
-                                {' '} / <span className="header-top-promo">{promoText}</span>
+                                {' '} /{' '}
+                                <span
+                                    className="header-top-promo"
+                                    dangerouslySetInnerHTML={{ __html: promoHtml }}
+                                />
                             </>
                         )}
                     </div>

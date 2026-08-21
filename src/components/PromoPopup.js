@@ -135,12 +135,6 @@ const PromoPopup = ({ discount, lang = defaultLang }) => {
 
                         {infos ? <p>{infos}</p> : null}
 
-                        {discount?.discount_code ? (
-                            <div className="promo-popup-code">
-                                {discount.discount_code}
-                            </div>
-                        ) : null}
-
                         {html ? (
                             <div
                                 className="promo-popup-html"
