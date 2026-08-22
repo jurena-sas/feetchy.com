@@ -17,7 +17,7 @@ const Home = ({ lang: langProp, initialBlogRawItems = [] } = {}) => {
     return (
         <div>
 <Header lang={currentLang} />
-            <BlogLatest lang={currentLang} initialRawItems={initialBlogRawItems} />
+            <BlogLatest lang={currentLang} initialRawItems={initialBlogRawItems} limit={0} />
 
 
 

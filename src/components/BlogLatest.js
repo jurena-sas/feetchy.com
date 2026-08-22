@@ -114,16 +114,20 @@ const buildImageUrl = (item) => {
     return `${IMG_URL}${clean}`;
 };
 
-const BlogLatest = ({ lang = 'fr', initialRawItems = [] }) => {
+const BlogLatest = ({ lang = 'fr', initialRawItems = [], limit = 3 }) => {
     const text = useMemo(() => uiText[lang] || uiText.fr, [lang]);
 
     const posts = useMemo(() => {
-        return [...initialRawItems]
-            .sort((a, b) =>
-                Number(b?.content?.content_order || 0) -
-                Number(a?.content?.content_order || 0)
-            )
-            .slice(0, 3)
+        const published = initialRawItems.filter(
+            (item) => item?.content?.content_statut === 'publish'
+        );
+
+        const sorted = published.sort((a, b) =>
+            Number(b?.content?.content_order || 0) -
+            Number(a?.content?.content_order || 0)
+        );
+
+        return (limit ? sorted.slice(0, limit) : sorted)
             .map((item) => {
                 const title =
                     getLocalizedValue(item?.metas?.content_title_feetchy, lang) ||
@@ -143,7 +147,7 @@ const BlogLatest = ({ lang = 'fr', initialRawItems = [] }) => {
                     image: buildImageUrl(item),
                 };
             });
-    }, [initialRawItems, lang]);
+    }, [initialRawItems, lang, limit]);
 
     return (
         <div className="blog-area home-page-2 ptb-80">
