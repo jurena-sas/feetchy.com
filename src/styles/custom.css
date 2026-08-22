@@ -9,6 +9,142 @@ a {
     padding: 10px;
 }
 
+/* Account page */
+
+.account-page {
+    padding: 60px 0 80px;
+}
+
+.account-page__title {
+    margin: 0 0 16px;
+    font-size: 42px;
+    line-height: 1.1;
+    font-weight: 700;
+}
+
+.account-page__intro {
+    max-width: 560px;
+    margin: 0 0 40px;
+    font-size: 15px;
+    font-weight: 300;
+    line-height: 24px;
+    color: #333;
+}
+
+.account-card {
+    max-width: 460px;
+    padding: 34px 34px 28px;
+    border: 1px solid #222;
+    background: #fff;
+}
+
+.account-card h4 {
+    margin: 0 0 20px;
+    font-size: 18px;
+    font-weight: 700;
+    text-transform: uppercase;
+}
+
+.account-field {
+    margin-bottom: 18px;
+}
+
+.account-field label {
+    display: block;
+    margin-bottom: 8px;
+    font-size: 14px;
+    font-weight: 700;
+    text-transform: uppercase;
+}
+
+.account-field input {
+    width: 100%;
+    height: 46px;
+    border: none;
+    background: #f2f2f2;
+    padding: 0 14px;
+    font-size: 15px;
+}
+
+.account-error {
+    margin-bottom: 16px;
+    color: #c0392b;
+    font-size: 14px;
+}
+
+.account-submit {
+    display: block;
+    width: 100%;
+    margin-top: 8px;
+    padding: 16px 20px;
+    border: none;
+    background: #1f1f1f;
+    color: #fff;
+    text-align: center;
+    text-transform: uppercase;
+    font-size: 15px;
+    font-weight: 700;
+    letter-spacing: 0.02em;
+    cursor: pointer;
+}
+
+.account-submit:disabled {
+    background: #999;
+    cursor: not-allowed;
+}
+
+.account-link-row {
+    margin-top: 20px;
+    font-size: 14px;
+}
+
+.account-orders-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-bottom: 30px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid #e5e5e5;
+}
+
+.account-orders-header h4 {
+    margin: 0;
+    font-size: 20px;
+    font-weight: 700;
+    text-transform: uppercase;
+}
+
+.account-order-card {
+    border: 1px solid #e5e5e5;
+    padding: 24px;
+    margin-bottom: 20px;
+}
+
+.account-order-card__head {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-bottom: 16px;
+    font-size: 14px;
+}
+
+.account-order-card__products {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 16px;
+    font-size: 14px;
+    color: #333;
+}
+
+.account-order-card__shipping {
+    border-top: 1px solid #efefef;
+    padding-top: 16px;
+    font-size: 14px;
+}
+
 select.selector-input {
     appearance: none;
     -webkit-appearance: none;
@@ -528,6 +664,22 @@ header .shop-cart a {
 
 .footer-title:before {
     bottom: -10px;
+}
+
+.footer-payment-badge {
+    display: inline-block;
+    margin-top: 12px;
+    padding: 10px 14px;
+    background: #fff;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.18);
+}
+
+.footer-payment-icons {
+    display: block;
+    max-width: 190px;
+    height: auto;
 }
 
 /* mainmenu */

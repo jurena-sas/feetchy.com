@@ -15,6 +15,20 @@ const textByLang = {
         de: 'Mein Konto',
         es: 'Mi cuenta',
     },
+    loginIntro: {
+        fr: 'Connectez-vous pour retrouver l’historique de vos commandes, suivre vos livraisons et télécharger vos factures.',
+        en: 'Sign in to access your order history, track your deliveries and download your invoices.',
+        it: 'Accedi per ritrovare la cronologia dei tuoi ordini, seguire le tue spedizioni e scaricare le fatture.',
+        de: 'Melden Sie sich an, um Ihre Bestellhistorie einzusehen, Lieferungen zu verfolgen und Rechnungen herunterzuladen.',
+        es: 'Inicia sesión para consultar el historial de tus pedidos, seguir tus envíos y descargar tus facturas.',
+    },
+    ordersIntro: {
+        fr: 'Retrouvez ci-dessous l’historique de toutes vos commandes Feetchy.',
+        en: 'Find the history of all your Feetchy orders below.',
+        it: 'Trova qui sotto la cronologia di tutti i tuoi ordini Feetchy.',
+        de: 'Hier finden Sie den Verlauf all Ihrer Feetchy-Bestellungen.',
+        es: 'Encuentra a continuación el historial de todos tus pedidos Feetchy.',
+    },
     email: {
         fr: 'Email',
         en: 'Email',
@@ -335,33 +349,32 @@ const AccountInner = ({ lang: langProp } = {}) => {
         <div>
             <Header lang={currentLang} />
 
-            <div className="page-title-wrapper">
+            <div className="account-page">
                 <div className="container">
-                    <div className="row">
-                        <div className="col-lg-12">
-                            <div className="page-title">
-                                <h3>{getText(currentLang, 'pageTitle', 'Mon compte')}</h3>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+                    <h1 className="account-page__title">
+                        {getText(currentLang, 'pageTitle', 'Mon compte')}
+                    </h1>
 
-            <div className="container" style={{ padding: '60px 0', maxWidth: 600 }}>
+                    <p className="account-page__intro">
+                        {getText(
+                            currentLang,
+                            isLoggedIn ? 'ordersIntro' : 'loginIntro'
+                        )}
+                    </p>
+
                 {!isLoggedIn ? (
                     <>
                         {mode === 'reset' ? (
-                            <form onSubmit={handleSetPassword}>
+                            <form onSubmit={handleSetPassword} className="account-card">
                                 <h4>{getText(currentLang, 'setPasswordTitle')}</h4>
 
-                                <div className="form-group contuct_f">
+                                <div className="account-field">
                                     <label htmlFor="account-new-password">
                                         {getText(currentLang, 'newPassword')}
                                     </label>
                                     <input
                                         type="password"
                                         id="account-new-password"
-                                        className="form-control"
                                         value={newPassword}
                                         onChange={(e) => setNewPassword(e.target.value)}
                                         minLength={4}
@@ -369,57 +382,55 @@ const AccountInner = ({ lang: langProp } = {}) => {
                                     />
                                 </div>
 
-                                {error && <p style={{ color: 'red' }}>{error}</p>}
+                                {error && <p className="account-error">{error}</p>}
 
                                 <button
                                     type="submit"
-                                    className="btn btn-default contact-btn"
+                                    className="account-submit"
                                     disabled={loading}
                                 >
                                     {getText(currentLang, 'setPasswordSubmit')}
                                 </button>
                             </form>
                         ) : mode === 'login' ? (
-                            <form onSubmit={handleLogin}>
-                                <div className="form-group contuct_f">
+                            <form onSubmit={handleLogin} className="account-card">
+                                <div className="account-field">
                                     <label htmlFor="account-email">
                                         {getText(currentLang, 'email', 'Email')}
                                     </label>
                                     <input
                                         type="email"
                                         id="account-email"
-                                        className="form-control"
                                         value={email}
                                         onChange={(e) => setEmail(e.target.value)}
                                         required
                                     />
                                 </div>
 
-                                <div className="form-group contuct_f">
+                                <div className="account-field">
                                     <label htmlFor="account-password">
                                         {getText(currentLang, 'password', 'Mot de passe')}
                                     </label>
                                     <input
                                         type="password"
                                         id="account-password"
-                                        className="form-control"
                                         value={password}
                                         onChange={(e) => setPassword(e.target.value)}
                                         required
                                     />
                                 </div>
 
-                                {error && <p style={{ color: 'red' }}>{error}</p>}
+                                {error && <p className="account-error">{error}</p>}
 
                                 <button
                                     type="submit"
-                                    className="btn btn-default contact-btn"
+                                    className="account-submit"
                                     disabled={loading}
                                 >
                                     {getText(currentLang, 'login', 'Se connecter')}
                                 </button>
 
-                                <p style={{ marginTop: 20 }}>
+                                <p className="account-link-row">
                                     <a
                                         href="#"
                                         title={getText(currentLang, 'noPassword', "Je n'ai pas de mot de passe")}
@@ -434,7 +445,7 @@ const AccountInner = ({ lang: langProp } = {}) => {
                                 </p>
                             </form>
                         ) : (
-                            <div>
+                            <div className="account-card">
                                 <h4>{getText(currentLang, 'requestPasswordTitle', 'Recevoir mon mot de passe')}</h4>
 
                                 {passwordSent ? (
@@ -443,25 +454,24 @@ const AccountInner = ({ lang: langProp } = {}) => {
                                     <form onSubmit={handleRequestPassword}>
                                         <p>{getText(currentLang, 'requestPasswordHint')}</p>
 
-                                        <div className="form-group contuct_f">
+                                        <div className="account-field">
                                             <label htmlFor="account-request-email">
                                                 {getText(currentLang, 'email', 'Email')}
                                             </label>
                                             <input
                                                 type="email"
                                                 id="account-request-email"
-                                                className="form-control"
                                                 value={email}
                                                 onChange={(e) => setEmail(e.target.value)}
                                                 required
                                             />
                                         </div>
 
-                                        {error && <p style={{ color: 'red' }}>{error}</p>}
+                                        {error && <p className="account-error">{error}</p>}
 
                                         <button
                                             type="submit"
-                                            className="btn btn-default contact-btn"
+                                            className="account-submit"
                                             disabled={loading}
                                         >
                                             {getText(currentLang, 'sendPassword')}
@@ -469,7 +479,7 @@ const AccountInner = ({ lang: langProp } = {}) => {
                                     </form>
                                 )}
 
-                                <p style={{ marginTop: 20 }}>
+                                <p className="account-link-row">
                                     <a
                                         href="#"
                                         title={getText(currentLang, 'backToLogin', 'Retour à la connexion')}
@@ -488,15 +498,8 @@ const AccountInner = ({ lang: langProp } = {}) => {
                     </>
                 ) : (
                     <div>
-                        <div
-                            style={{
-                                display: 'flex',
-                                justifyContent: 'space-between',
-                                alignItems: 'center',
-                                marginBottom: 30,
-                            }}
-                        >
-                            <h4 style={{ margin: 0 }}>
+                        <div className="account-orders-header">
+                            <h4>
                                 {getText(currentLang, 'myOrders', 'Mes commandes')}
                                 {customer?.firstname ? ` — ${customer.firstname}` : ''}
                             </h4>
@@ -514,29 +517,15 @@ const AccountInner = ({ lang: langProp } = {}) => {
                         </div>
 
                         {ordersLoading && <p>...</p>}
-                        {ordersError && <p style={{ color: 'red' }}>{ordersError}</p>}
+                        {ordersError && <p className="account-error">{ordersError}</p>}
 
                         {!ordersLoading && !ordersError && orders.length === 0 && (
                             <p>{getText(currentLang, 'noOrders')}</p>
                         )}
 
                         {orders.map((order) => (
-                            <div
-                                key={order.reference}
-                                style={{
-                                    border: '1px solid #eee',
-                                    padding: 20,
-                                    marginBottom: 20,
-                                }}
-                            >
-                                <div
-                                    style={{
-                                        display: 'flex',
-                                        justifyContent: 'space-between',
-                                        flexWrap: 'wrap',
-                                        marginBottom: 12,
-                                    }}
-                                >
+                            <div key={order.reference} className="account-order-card">
+                                <div className="account-order-card__head">
                                     <strong>
                                         {getText(currentLang, 'orderRef', 'Commande')} {order.reference}
                                     </strong>
@@ -557,7 +546,7 @@ const AccountInner = ({ lang: langProp } = {}) => {
                                     )}
                                 </div>
 
-                                <ul style={{ listStyle: 'none', padding: 0, margin: '0 0 12px' }}>
+                                <ul className="account-order-card__products">
                                     {order.products.map((product, index) => (
                                         <li key={index}>
                                             {product.quantity} x {product.name}
@@ -566,7 +555,7 @@ const AccountInner = ({ lang: langProp } = {}) => {
                                     ))}
                                 </ul>
 
-                                <div style={{ borderTop: '1px solid #eee', paddingTop: 12 }}>
+                                <div className="account-order-card__shipping">
                                     <strong>{getText(currentLang, 'shippingActivity')}</strong>
 
                                     {order.shipping?.trackingNumber ? (
@@ -594,6 +583,7 @@ const AccountInner = ({ lang: langProp } = {}) => {
                         ))}
                     </div>
                 )}
+                </div>
             </div>
 
             <Footer lang={currentLang} />
