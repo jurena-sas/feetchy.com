@@ -75,8 +75,8 @@ const cleanUrl = (url = '') => {
 
 const buildArticleUrl = (item, lang) => {
     const urlMap =
-        item?.metas?.content_permalink_feetchy ||
         item?.metas?.content_url_feetchy ||
+        item?.metas?.content_permalink_feetchy ||
         item?.metas?.content_url ||
         {};
 
