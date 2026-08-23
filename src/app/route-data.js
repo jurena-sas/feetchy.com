@@ -139,6 +139,10 @@ const SITEMAP_STATUT_ALLOWED = ['publish', 'home'];
 
 const mapSitemapItem = (item, lang) => {
   const title =
+    item?.metas?.content_title_feetchy?.[lang]?.trim() ||
+    item?.metas?.content_title_feetchy?.fr?.trim() ||
+    item?.metas?.content_label_feetchy?.[lang]?.trim() ||
+    item?.metas?.content_label_feetchy?.fr?.trim() ||
     item?.content?.content_title?.[lang]?.trim() ||
     item?.content?.content_title?.fr?.trim() ||
     '';

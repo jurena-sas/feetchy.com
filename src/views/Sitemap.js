@@ -82,9 +82,9 @@ const Sitemap = ({
     <div>
       <Header lang={lang} />
 
-      <div className="page-title-wrapper sitemap-page">
-        <div className="container">
-          <h1 className="mb-4">{getLocalizedValue(textByLang.title, lang, 'Plan du site')}</h1>
+      <div className="page-title-wrapper sitemap-page" style={{ marginTop: '50px', marginBottom: '100px' }}>
+        <div className="container postfeetchy-content">
+          <h1 className="postfeetchy-title mb-4">{getLocalizedValue(textByLang.title, lang, 'Plan du site')}</h1>
 
           <SitemapSection
             title={getLocalizedValue(textByLang.pages, lang, 'Nos pages')}
