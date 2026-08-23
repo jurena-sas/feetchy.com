@@ -7,6 +7,24 @@ import { defaultLang } from '../config.js';
 
 const IMG_URL = '/uploads/';
 
+const escapeAttr = (str = '') =>
+    String(str)
+        .replace(/&/g, '&amp;')
+        .replace(/"/g, '&quot;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;');
+
+const insertAfterFirstParagraph = (htmlContent, imgHtml) => {
+    if (!imgHtml) return htmlContent;
+    if (!htmlContent) return imgHtml;
+
+    const match = htmlContent.match(/<\/p\s*>/i);
+    if (!match) return `${imgHtml}${htmlContent}`;
+
+    const index = htmlContent.indexOf(match[0]) + match[0].length;
+    return `${htmlContent.slice(0, index)}${imgHtml}${htmlContent.slice(index)}`;
+};
+
 const PostFeetchy = ({ id, lang = defaultLang, initialContentData = null }) => {
     const item = initialContentData;
 
@@ -21,7 +39,7 @@ const PostFeetchy = ({ id, lang = defaultLang, initialContentData = null }) => {
         metas?.content_title_lang_0 ||
         '';
 
-    const html =
+    const rawHtml =
         metas?.content_html_feetchy?.[lang] ||
         metas?.content_html_feetchy?.[defaultLang] ||
         '';
@@ -38,6 +56,14 @@ const PostFeetchy = ({ id, lang = defaultLang, initialContentData = null }) => {
             : `${IMG_URL}${String(imageName).replace(/^\/+/, '')}`
         : '';
 
+    const imageAlt = title || 'Article image';
+
+    const imgHtml = imageUrl
+        ? `<img src="${escapeAttr(imageUrl)}" alt="${escapeAttr(imageAlt)}" title="${escapeAttr(imageAlt)}" class="img-fluid mb-4" loading="lazy" decoding="async" onerror="this.style.display='none'" />`
+        : '';
+
+    const html = insertAfterFirstParagraph(rawHtml, imgHtml);
+
     return (
         <>
             <Header lang={lang} />
@@ -47,20 +73,6 @@ const PostFeetchy = ({ id, lang = defaultLang, initialContentData = null }) => {
                     <div className="row">
                         <div className="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                             {title && <h1 className="mb-4">{title}</h1>}
-
-                            {imageUrl && (
-                                <div className="mb-4">
-                                    <img
-                                        src={imageUrl}
-                                        alt={title || 'Article image'}
-                                        title={title || 'Article image'}
-                                        className="img-fluid"
-                                        onError={(e) => {
-                                            e.currentTarget.style.display = 'none';
-                                        }}
-                                    />
-                                </div>
-                            )}
 
                             {html && (
                                 <div dangerouslySetInnerHTML={{ __html: html }} />
