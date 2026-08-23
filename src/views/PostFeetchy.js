@@ -68,14 +68,14 @@ const PostFeetchy = ({ id, lang = defaultLang, initialContentData = null }) => {
         <>
             <Header lang={lang} />
 
-            <div className="page-title-wrapper">
+            <div className="page-title-wrapper" style={{ marginTop: '50px', marginBottom: '100px' }}>
                 <div className="container">
                     <div className="row">
                         <div className="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                            {title && <h1 className="mb-4">{title}</h1>}
+                            {title && <h1 className="postfeetchy-title mb-4">{title}</h1>}
 
                             {html && (
-                                <div dangerouslySetInnerHTML={{ __html: html }} />
+                                <div className="postfeetchy-content" dangerouslySetInnerHTML={{ __html: html }} />
                             )}
                         </div>
                     </div>

@@ -205,6 +205,54 @@ select.selector-input {
   flex-wrap: wrap;
 }
 
+.postfeetchy-title,
+.postfeetchy-content h1,
+.postfeetchy-content h2,
+.postfeetchy-content h3,
+.postfeetchy-content h4,
+.postfeetchy-content h5,
+.postfeetchy-content h6 {
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif !important;
+  font-weight: 900 !important;
+  text-transform: uppercase !important;
+  line-height: 1.35 !important;
+  margin-top: 21px !important;
+  margin-bottom: 12px !important;
+}
+
+.postfeetchy-title,
+.postfeetchy-content h1 {
+  font-size: 32px !important;
+}
+
+.postfeetchy-content h2 {
+  font-size: 24px !important;
+}
+
+.postfeetchy-content h3 {
+  font-size: 20px !important;
+}
+
+.postfeetchy-content h4 {
+  font-size: 18px !important;
+}
+
+.postfeetchy-content h5 {
+  font-size: 17px !important;
+}
+
+.postfeetchy-content h6 {
+  font-size: 15px !important;
+}
+
+.postfeetchy-content p {
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif !important;
+  font-weight: 300 !important;
+  font-size: 15px !important;
+  line-height: 24px !important;
+  margin-bottom: 18px !important;
+}
+
 .blog-img {
   aspect-ratio: 1 / 1;
   position: relative;
