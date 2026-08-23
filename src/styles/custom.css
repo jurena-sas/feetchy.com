@@ -200,6 +200,11 @@ select.selector-input {
   line-height: 28px;
 }
 
+.blog-area .row {
+  display: flex;
+  flex-wrap: wrap;
+}
+
 .blog-img {
   aspect-ratio: 1 / 1;
   position: relative;
