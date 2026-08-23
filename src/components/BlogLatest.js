@@ -167,8 +167,8 @@ const BlogLatest = ({ lang = 'fr', initialRawItems = [], limit = 3 }) => {
                         posts.map((post) => (
                             <div key={post.id} className="col-lg-4 col-md-4 col-sm-6 col-xs-12">
                                 <div className="single-blog">
-                                    {post.image ? (
-                                        <div className="blog-img">
+                                    <div className="blog-img">
+                                        {post.image ? (
                                             <a href={post.url} title={post.title}>
                                                 <img
                                                     src={post.image}
@@ -179,8 +179,8 @@ const BlogLatest = ({ lang = 'fr', initialRawItems = [], limit = 3 }) => {
                                                     }}
                                                 />
                                             </a>
-                                        </div>
-                                    ) : null}
+                                        ) : null}
+                                    </div>
 
                                     <div className="blog-info">
                                         <a href={post.url} title={post.title}>

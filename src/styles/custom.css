@@ -203,6 +203,7 @@ select.selector-input {
 .blog-img {
   aspect-ratio: 1 / 1;
   position: relative;
+  background-color: #f5f5f5;
 }
 
 .blog-img img {
